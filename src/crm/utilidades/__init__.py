@@ -1,1 +1,3 @@
-from .gestor_archivos import GestorArchivos  # type: ignore # noqa: F401
+# ruff: noqa: F401
+# type: ignore
+from .gestor_archivos import GestorArchivos
