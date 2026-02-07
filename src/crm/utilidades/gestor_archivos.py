@@ -8,15 +8,14 @@ T = TypeVar("T")
 
 class GestorArchivos:
     @staticmethod
-    def crear_directorio(ruta: str) -> None:
+    def crear_directorio(ruta: str | Path) -> None:
         """Crea las carpetas (en caso de no existir) de la ruta indicada."""
         path = Path(ruta)
         path = path.parent if path.suffix else path
-        if not path.exists():
-            path.mkdir(parents=True, exist_ok=True)
+        path.mkdir(parents=True, exist_ok=True)
 
     @staticmethod
-    def leer_json(ruta: str, default: T) -> T:
+    def leer_json(ruta: str | Path, default: T) -> T:
         """Lee y retorna el contenido de un archivo .json"""
         try:
             with open(ruta, encoding="utf-8") as archivo:
@@ -25,7 +24,7 @@ class GestorArchivos:
             return default
 
     @classmethod
-    def guardar_json(cls, ruta: str, datos: Any):
+    def guardar_json(cls, ruta: str | Path, datos: Any):
         """Crea o sobrescribe un archivo .json en la ruta indicada."""
         try:
             cls.crear_directorio(ruta)
