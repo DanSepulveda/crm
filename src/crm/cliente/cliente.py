@@ -45,19 +45,11 @@ class Cliente:
         return rut
 
     @classmethod
-    def desde_dict(cls, datos: dict) -> "Cliente":
-        """Crea una instancia de Cliente a partir de un diccionario."""
-        direccion = Direccion.desde_dict(datos["direccion"])
-
-        return cls(
-            rut=datos["rut"],
-            nombres=datos["nombres"],
-            apellido_paterno=datos["apellido_paterno"],
-            apellido_materno=datos["apellido_materno"],
-            correo=datos["correo"],
-            telefono=datos["telefono"],
-            direccion=direccion,
-        )
+    def desde_dict(cls, datos: dict):
+        """Crea una instancia de la clase a partir de un diccionario."""
+        datos = datos.copy()
+        datos["direccion"] = Direccion.desde_dict(datos["direccion"])
+        return cls(**datos)
 
     @staticmethod
     def _es_rut_valido(rut: str) -> bool:
