@@ -1,0 +1,654 @@
+[
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Juan Pablo",
+    "apellido_paterno": "Pérez",
+    "apellido_materno": "García",
+    "correo": "juan.perez@email.com",
+    "telefono": "+56984729103",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 1250
+  },
+  {
+    "tipo": "Premium",
+    "rut": "18440735-3",
+    "nombres": "María José",
+    "apellido_paterno": "Soto",
+    "apellido_materno": "López",
+    "correo": "m.soto@email.com",
+    "telefono": "+56966384021",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "porcentaje_descuento": 0.35
+  },
+  {
+    "tipo": "Corporativo",
+    "rut": "18440735-3",
+    "nombres": "Carlos",
+    "apellido_paterno": "Errázuriz",
+    "apellido_materno": "Vial",
+    "correo": "contacto@techcorp.cl",
+    "telefono": "+56955038192",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "razon_social": "Tecnologías Globales SpA",
+    "limite_credito": 4500000
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Francisca",
+    "apellido_paterno": "Muñoz",
+    "apellido_materno": "Rojas",
+    "correo": "fran.munoz@email.com",
+    "telefono": "+56994820173",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 4820
+  },
+  {
+    "tipo": "Premium",
+    "rut": "18440735-3",
+    "nombres": "Andrés",
+    "apellido_paterno": "Castro",
+    "apellido_materno": "Morales",
+    "correo": "a.castro@gmail.com",
+    "telefono": "+56933019284",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "porcentaje_descuento": 0.15
+  },
+  {
+    "tipo": "Corporativo",
+    "rut": "18440735-3",
+    "nombres": "Valentina",
+    "apellido_paterno": "Pinto",
+    "apellido_materno": "Díaz",
+    "correo": "vpinto@logistica-norte.cl",
+    "telefono": "+56977102938",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "razon_social": "Logística del Norte S.A.",
+    "limite_credito": 8200000
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Sebastián",
+    "apellido_paterno": "Tapia",
+    "apellido_materno": "Fuentes",
+    "correo": "seba.tapia@outlook.com",
+    "telefono": "+56944837201",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 315
+  },
+  {
+    "tipo": "Premium",
+    "rut": "18440735-3",
+    "nombres": "Camila",
+    "apellido_paterno": "Henríquez",
+    "apellido_materno": "Silva",
+    "correo": "cami.h@gmail.com",
+    "telefono": "+56966102934",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "porcentaje_descuento": 0.48
+  },
+  {
+    "tipo": "Corporativo",
+    "rut": "18440735-3",
+    "nombres": "Roberto",
+    "apellido_paterno": "Araya",
+    "apellido_materno": "Cortes",
+    "correo": "ventas@minera-andes.cl",
+    "telefono": "+56988273645",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "razon_social": "Minera Los Andes Ltda",
+    "limite_credito": 10000000
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Javiera",
+    "apellido_paterno": "Salazar",
+    "apellido_materno": "Peña",
+    "correo": "javis@email.com",
+    "telefono": "+56911228833",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 2740
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Felipe",
+    "apellido_paterno": "Vargas",
+    "apellido_materno": "Orellana",
+    "correo": "f.vargas@yahoo.cl",
+    "telefono": "+56955449900",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 890
+  },
+  {
+    "tipo": "Premium",
+    "rut": "18440735-3",
+    "nombres": "Antonia",
+    "apellido_paterno": "Carrasco",
+    "apellido_materno": "Godoy",
+    "correo": "anto.c@live.com",
+    "telefono": "+56977221166",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "porcentaje_descuento": 0.22
+  },
+  {
+    "tipo": "Corporativo",
+    "rut": "18440735-3",
+    "nombres": "Ignacio",
+    "apellido_paterno": "Sepúlveda",
+    "apellido_materno": "Méndez",
+    "correo": "gerencia@agro-valle.cl",
+    "telefono": "+56933887722",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "razon_social": "AgroIndustrial Valle Central",
+    "limite_credito": 3500000
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Daniela",
+    "apellido_paterno": "Molina",
+    "apellido_materno": "Valenzuela",
+    "correo": "dani.m@email.com",
+    "telefono": "+56988445511",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 150
+  },
+  {
+    "tipo": "Premium",
+    "rut": "18440735-3",
+    "nombres": "Gonzalo",
+    "apellido_paterno": "Reyes",
+    "apellido_materno": "Figueroa",
+    "correo": "g.reyes@empresa.com",
+    "telefono": "+56922993388",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "porcentaje_descuento": 0.5
+  },
+  {
+    "tipo": "Corporativo",
+    "rut": "18440735-3",
+    "nombres": "Verónica",
+    "apellido_paterno": "Toro",
+    "apellido_materno": "Pardo",
+    "correo": "v.toro@constructora-mar.cl",
+    "telefono": "+56944770022",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "razon_social": "Constructora del Mar SpA",
+    "limite_credito": 6700000
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Cristian",
+    "apellido_paterno": "Zúñiga",
+    "apellido_materno": "Heredia",
+    "correo": "czuniga@gmail.com",
+    "telefono": "+56966115544",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 3310
+  },
+  {
+    "tipo": "Premium",
+    "rut": "18440735-3",
+    "nombres": "Loreto",
+    "apellido_paterno": "Farías",
+    "apellido_materno": "Toledo",
+    "correo": "lore.farias@email.com",
+    "telefono": "+56911337744",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "porcentaje_descuento": 0.28
+  },
+  {
+    "tipo": "Corporativo",
+    "rut": "18440735-3",
+    "nombres": "Mauricio",
+    "apellido_paterno": "Bravo",
+    "apellido_materno": "Sáez",
+    "correo": "mbravo@retailchile.cl",
+    "telefono": "+56955882299",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "razon_social": "Servicios de Retail Chile Ltda",
+    "limite_credito": 1200000
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Nicole",
+    "apellido_paterno": "Vásquez",
+    "apellido_materno": "Donoso",
+    "correo": "n.vasquez@gmail.com",
+    "telefono": "+56933661100",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 4900
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Esteban",
+    "apellido_paterno": "Miranda",
+    "apellido_materno": "Reyes",
+    "correo": "emiranda@outlook.com",
+    "telefono": "+56977441188",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 2100
+  },
+  {
+    "tipo": "Premium",
+    "rut": "18440735-3",
+    "nombres": "Bárbara",
+    "apellido_paterno": "Sanhueza",
+    "apellido_materno": "Guerra",
+    "correo": "bsanhueza@gmail.com",
+    "telefono": "+56944993322",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "porcentaje_descuento": 0.42
+  },
+  {
+    "tipo": "Corporativo",
+    "rut": "18440735-3",
+    "nombres": "Hugo",
+    "apellido_paterno": "Navarrete",
+    "apellido_materno": "Ponce",
+    "correo": "hnavarrete@transporte-rapido.cl",
+    "telefono": "+56922884477",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "razon_social": "Transportes Rápido y Seguro SpA",
+    "limite_credito": 900000
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Andrea",
+    "apellido_paterno": "Olivares",
+    "apellido_materno": "Urzúa",
+    "correo": "aolivares@email.com",
+    "telefono": "+56988116633",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 650
+  },
+  {
+    "tipo": "Premium",
+    "rut": "18440735-3",
+    "nombres": "Patricio",
+    "apellido_paterno": "Gallardo",
+    "apellido_materno": "Vidal",
+    "correo": "pgallardo@gmail.com",
+    "telefono": "+56911559900",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "porcentaje_descuento": 0.12
+  },
+  {
+    "tipo": "Corporativo",
+    "rut": "18440735-3",
+    "nombres": "Claudia",
+    "apellido_paterno": "Palacios",
+    "apellido_materno": "Arroyo",
+    "correo": "cpalacios@textil-sur.cl",
+    "telefono": "+56933114477",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "razon_social": "Manufacturas Textil Sur S.A.",
+    "limite_credito": 2800000
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Gabriel",
+    "apellido_paterno": "Espejo",
+    "apellido_materno": "Luna",
+    "correo": "gespejo@outlook.cl",
+    "telefono": "+56966883311",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 1150
+  },
+  {
+    "tipo": "Premium",
+    "rut": "18440735-3",
+    "nombres": "Mónica",
+    "apellido_paterno": "Riveros",
+    "apellido_materno": "Bernal",
+    "correo": "m.riveros@email.com",
+    "telefono": "+56977002255",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "porcentaje_descuento": 0.3
+  },
+  {
+    "tipo": "Corporativo",
+    "rut": "18440735-3",
+    "nombres": "Álvaro",
+    "apellido_paterno": "Bustamante",
+    "apellido_materno": "Salas",
+    "correo": "abustamante@energia-solar.cl",
+    "telefono": "+56944119966",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "razon_social": "Energía Solar Futura Ltda",
+    "limite_credito": 5400000
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Sandra",
+    "apellido_paterno": "Campos",
+    "apellido_materno": "Duran",
+    "correo": "s.campos@gmail.com",
+    "telefono": "+56922558833",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 3950
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Ricardo",
+    "apellido_paterno": "Guerrero",
+    "apellido_materno": "Flores",
+    "correo": "r.guerrero@email.cl",
+    "telefono": "+56999331100",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 15
+  },
+  {
+    "tipo": "Premium",
+    "rut": "18440735-3",
+    "nombres": "Natalia",
+    "apellido_paterno": "Valdés",
+    "apellido_materno": "Maldonado",
+    "correo": "n.valdes@yahoo.com",
+    "telefono": "+56911884477",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "porcentaje_descuento": 0.45
+  },
+  {
+    "tipo": "Corporativo",
+    "rut": "18440735-3",
+    "nombres": "Oscar",
+    "apellido_paterno": "Cabrera",
+    "apellido_materno": "Leiva",
+    "correo": "ventas@frutos-chile.cl",
+    "telefono": "+56955227744",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "razon_social": "Exportadora Frutos de Chile",
+    "limite_credito": 7100000
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Karla",
+    "apellido_paterno": "Suárez",
+    "apellido_materno": "Jiménez",
+    "correo": "k.suarez@gmail.com",
+    "telefono": "+56933771100",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 1800
+  },
+  {
+    "tipo": "Premium",
+    "rut": "18440735-3",
+    "nombres": "Héctor",
+    "apellido_paterno": "Barrera",
+    "apellido_materno": "Escobar",
+    "correo": "h.barrera@outlook.com",
+    "telefono": "+56966442299",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "porcentaje_descuento": 0.19
+  },
+  {
+    "tipo": "Corporativo",
+    "rut": "18440735-3",
+    "nombres": "Elena",
+    "apellido_paterno": "Correa",
+    "apellido_materno": "Saavedra",
+    "correo": "contacto@vinos-andes.cl",
+    "telefono": "+56922660033",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "razon_social": "Viñedos de los Andes SpA",
+    "limite_credito": 9500000
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Matías",
+    "apellido_paterno": "Ibarra",
+    "apellido_materno": "Pavez",
+    "correo": "m.ibarra@gmail.com",
+    "telefono": "+56988339911",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 420
+  },
+  {
+    "tipo": "Premium",
+    "rut": "18440735-3",
+    "nombres": "Sofía",
+    "apellido_paterno": "Oyarzún",
+    "apellido_materno": "Lara",
+    "correo": "sofi.oyarzun@email.com",
+    "telefono": "+56944110077",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "porcentaje_descuento": 0.33
+  },
+  {
+    "tipo": "Corporativo",
+    "rut": "18440735-3",
+    "nombres": "Raúl",
+    "apellido_paterno": "Aguayo",
+    "apellido_materno": "Cerda",
+    "correo": "operaciones@pesquera-sur.cl",
+    "telefono": "+56977229944",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "razon_social": "Pesquera del Sur Austral S.A.",
+    "limite_credito": 3000000
+  },
+  {
+    "tipo": "Regular",
+    "rut": "18440735-3",
+    "nombres": "Constanza",
+    "apellido_paterno": "Parra",
+    "apellido_materno": "Vergara",
+    "correo": "conny.parra@gmail.com",
+    "telefono": "+56933550022",
+    "direccion": {
+      "calle": "lo espejo",
+      "numero": "0186",
+      "region": "Región Metropolitana de Santiago",
+      "comuna": "El Bosque"
+    },
+    "puntos": 2980
+  }
+]
