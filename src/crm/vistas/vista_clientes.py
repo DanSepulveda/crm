@@ -1,3 +1,4 @@
+import tkinter as tk
 from tkinter import ttk
 
 
@@ -78,17 +79,13 @@ class VistaClientes(ttk.Frame):
             frame_opciones,
             text="Volver al inicio",
             width=15,
-            command=lambda: self.app._mostrar_vista("VistaInicio"),
+            command=self._volver_al_inicio,
         ).pack(pady=(40, 0))
 
     def _refrescar_tabla(self, busqueda: str = ""):
-        # 1) Vaciar la tabla
         self.tabla.delete(*self.tabla.get_children())
-
-        # 2) Obtener clientes filtrados
         clientes = self.app.servicio_cliente.obtener_filtrados(busqueda)
 
-        # 3) Mostrar resultado (clientes o mensaje)
         if not self.app.servicio_cliente.obtener_todos():
             self._mostrar_mensaje("No hay clientes registrados.")
         elif not clientes:
@@ -119,3 +116,11 @@ class VistaClientes(ttk.Frame):
         self.frame_tabla.pack_forget()
         self.resultado.config(text=mensaje)
         self.resultado.pack()
+
+    def _limpiar_busqueda(self):
+        self.buscador.delete(0, tk.END)
+        self._refrescar_tabla()
+
+    def _volver_al_inicio(self):
+        self._limpiar_busqueda()
+        self.app._mostrar_vista("VistaInicio")
