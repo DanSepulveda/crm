@@ -17,7 +17,7 @@ class Cliente:
         telefono: str,
         direccion: Direccion,
     ):
-        self.rut = rut
+        self._rut = self._validar_y_formatear_rut(rut)
         self.nombres = nombres
         self.apellido_paterno = apellido_paterno
         self.apellido_materno = apellido_materno
@@ -25,14 +25,39 @@ class Cliente:
         self.telefono = telefono
         self.direccion = direccion
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Cliente {self.TIPO} - {self.nombre_completo}"
 
-    def __eq__(self, cliente):
+    def __eq__(self, cliente: object) -> bool:
         """Dos clientes son iguales si tienen el mismo RUT."""
         if not isinstance(cliente, Cliente):
             return NotImplemented
         return self.rut == cliente.rut
+
+    @classmethod
+    def _validar_y_formatear_rut(cls, rut: str) -> str:
+        """Valida un RUT y lo retorna con un formato único."""
+        rut = rut.replace(".", "").replace(" ", "").upper()
+
+        if not cls._es_rut_valido(rut):
+            raise ValueError("RUT inválido.")
+
+        return rut
+
+    @classmethod
+    def desde_dict(cls, datos: dict) -> "Cliente":
+        """Crea una instancia de Cliente a partir de un diccionario."""
+        direccion = Direccion.desde_dict(datos["direccion"])
+
+        return cls(
+            rut=datos["rut"],
+            nombres=datos["nombres"],
+            apellido_paterno=datos["apellido_paterno"],
+            apellido_materno=datos["apellido_materno"],
+            correo=datos["correo"],
+            telefono=datos["telefono"],
+            direccion=direccion,
+        )
 
     @staticmethod
     def _es_rut_valido(rut: str) -> bool:
@@ -57,66 +82,66 @@ class Cliente:
         return digito_verificador == str(resultado)
 
     @staticmethod
-    def _validar_nombre(valor: str) -> str:
+    def _validar_nombre(valor: str, nombre_campo: str) -> str:
         """Retorna texto formateado luego de validarlo (para nombres y apellidos.)"""
         if not valor or not valor.strip():
-            raise ValueError("Campo obligatorio.")
+            raise ValueError(f"{nombre_campo} es obligatorio.")
 
         valor = " ".join(valor.strip().split())
 
-        if len(valor) < 2 or len(valor) > 50:
-            raise ValueError("Largo inválido.")
+        if len(valor) < 2:
+            raise ValueError(f"{nombre_campo}: mínimo 2 caracteres")
+
+        if len(valor) > 50:
+            raise ValueError(f"{nombre_campo}: Demasiado largo.")
 
         if not valor.replace(" ", "").isalpha():
-            raise ValueError("Solo letras y espacios.")
+            raise ValueError(f"{nombre_campo}: solo letras y espacios.")
 
         return valor.title()
 
     @property
-    def nombre_completo(self):
+    def nombre_completo(self) -> str:
         return " ".join(
             (self.nombres, self.apellido_paterno, self.apellido_materno)
         )
 
     @property
-    def rut(self):
+    def rut(self) -> str:
         return self._rut
 
-    @rut.setter
-    def rut(self, nuevo_rut: str):
-        nuevo_rut = nuevo_rut.replace(".", "").replace(" ", "").upper()
-
-        if not self._es_rut_valido(nuevo_rut):
-            raise ValueError("RUT inválido.")
-
-        self._rut = nuevo_rut
-
     @property
-    def nombres(self):
+    def nombres(self) -> str:
         return self._nombres
 
     @nombres.setter
     def nombres(self, nuevo_nombre: str):
-        self._nombres = self._validar_nombre(nuevo_nombre)
+        self._nombres = self._validar_nombre(
+            nuevo_nombre, nombre_campo="Nombres"
+        )
 
     @property
-    def apellido_paterno(self):
+    def apellido_paterno(self) -> str:
         return self._apellido_paterno
 
     @apellido_paterno.setter
-    def apellido_paterno(self, nuevo_apellido):
-        self._apellido_paterno = self._validar_nombre(nuevo_apellido)
+    def apellido_paterno(self, nuevo_apellido: str):
+        self._apellido_paterno = self._validar_nombre(
+            nuevo_apellido, nombre_campo="Apellido Paterno"
+        )
 
     @property
-    def apellido_materno(self):
+    def apellido_materno(self) -> str:
         return self._apellido_materno
 
     @apellido_materno.setter
     def apellido_materno(self, nuevo_apellido):
-        self._apellido_materno = self._validar_nombre(nuevo_apellido)
+        self._apellido_materno = self._validar_nombre(
+            nuevo_apellido, nombre_campo="Apellido Materno"
+        )
 
     @property
-    def correo(self):
+    def correo(self) -> str:
         return self._correo
 
     @correo.setter
@@ -129,7 +154,7 @@ class Cliente:
         self._correo = nuevo_correo
 
     @property
-    def telefono(self):
+    def telefono(self) -> str:
         return self._telefono
 
     @telefono.setter
@@ -147,7 +172,7 @@ class Cliente:
         self._telefono = nuevo_telefono
 
     @property
-    def direccion(self):
+    def direccion(self) -> "Direccion":
         return self._direccion
 
     @direccion.setter
@@ -157,16 +182,17 @@ class Cliente:
 
         self._direccion = nueva_direccion
 
-    def to_dict(self):
+    def a_dict(self):
         """Retorna el objeto Cliente en formato dict"""
         return {
+            "tipo": self.TIPO,
             "rut": self.rut,
             "nombres": self.nombres,
             "apellido_paterno": self.apellido_paterno,
             "apellido_materno": self.apellido_materno,
             "correo": self.correo,
             "telefono": self.telefono,
-            "direccion": self.direccion.to_dict(),
+            "direccion": self.direccion.a_dict(),
         }
 
 
