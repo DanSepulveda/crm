@@ -63,9 +63,12 @@ class VistaClientes(ttk.Frame):
         frame_opciones = ttk.Frame(self)
         frame_opciones.grid(column=1, row=0, sticky="news", padx=10, pady=10)
 
-        ttk.Button(frame_opciones, text="Crear Usuario", width=15).pack(
-            pady=(0, 10)
-        )
+        ttk.Button(
+            frame_opciones,
+            text="Crear Usuario",
+            width=15,
+            command=lambda: self._navegar_a("VistaFormulario"),
+        ).pack(pady=(0, 10))
 
         ttk.Button(frame_opciones, text="Editar usuario", width=15).pack(
             pady=(0, 10)
@@ -79,7 +82,7 @@ class VistaClientes(ttk.Frame):
             frame_opciones,
             text="Volver al inicio",
             width=15,
-            command=self._volver_al_inicio,
+            command=lambda: self._navegar_a("VistaInicio"),
         ).pack(pady=(40, 0))
 
     def _refrescar_tabla(self, busqueda: str = ""):
@@ -121,6 +124,9 @@ class VistaClientes(ttk.Frame):
         self.buscador.delete(0, tk.END)
         self._refrescar_tabla()
 
-    def _volver_al_inicio(self):
+    def _navegar_a(self, vista: str):
         self._limpiar_busqueda()
-        self.app._mostrar_vista("VistaInicio")
+        self.app._mostrar_vista(vista)
+
+    def handle_prueba(self):
+        print("hola")
