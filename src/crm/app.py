@@ -2,7 +2,12 @@ import tkinter as tk
 from tkinter import ttk
 
 from src.crm.cliente import ServicioCliente
-from src.crm.vistas import VistaClientes, VistaInicio, VistaLogs
+from src.crm.vistas import (
+    VistaClientes,
+    VistaFormulario,
+    VistaInicio,
+    VistaLogs,
+)
 
 
 class App(tk.Tk):
@@ -25,7 +30,7 @@ class App(tk.Tk):
         container = ttk.Frame(self)
         container.grid(column=0, row=0)
 
-        for vista in (VistaClientes, VistaInicio, VistaLogs):
+        for vista in (VistaClientes, VistaFormulario, VistaInicio, VistaLogs):
             frame = vista(container, self)
             self._vistas[vista.__name__] = frame
             frame.grid(column=0, row=0, sticky="nsew")
