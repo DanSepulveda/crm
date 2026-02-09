@@ -74,8 +74,8 @@ class VistaClientes(ttk.Frame):
             )
             self._tabla.heading(nombre, text=nombre)
 
-        # self._tabla.bind("<<TreeviewSelect>>", handle_click_fila)
         self._buscador.bind("<KeyRelease>", self._handle_busqueda)
+        self._tabla.bind("<<TreeviewSelect>>", self._handle_click_fila)
         self._refrescar_tabla()
 
         # -------------------- FRAME BOTONES (DERECHA) ------------------------
@@ -89,19 +89,25 @@ class VistaClientes(ttk.Frame):
             command=lambda: self._navegar_a("VistaFormulario"),
         ).pack(pady=(0, 10))
 
-        ttk.Button(
+        self._btn_editar = ttk.Button(
             frame_opciones,
             text="Editar usuario",
             width=15,
+            state="disabled",
+            style="Custom.TButton",
             # command=lambda: self._navegar_a("x"),
-        ).pack(pady=(0, 10))
+        )
+        self._btn_editar.pack(pady=(0, 10))
 
-        ttk.Button(
+        self._btn_eliminar = ttk.Button(
             frame_opciones,
             text="Eliminar usuario",
             width=15,
+            state="disabled",
+            style="Custom.TButton",
             # command=lambda: self._navegar_a("x"),
-        ).pack(pady=(0, 10))
+        )
+        self._btn_eliminar.pack(pady=(0, 10))
 
         ttk.Button(
             frame_opciones,
@@ -140,6 +146,26 @@ class VistaClientes(ttk.Frame):
     def _handle_busqueda(self, _):
         busqueda = self._buscador.get()
         self._refrescar_tabla(busqueda)
+
+    def _handle_click_fila(self, _):
+        seleccion = self._tabla.selection()
+
+        if seleccion:
+            id_item = seleccion[0]
+            rut_elegido: str = self._tabla.item(id_item, "values")[2].strip()
+            self._app.rut_usuario_seleccionado = rut_elegido
+            self._toggle_botones(activar=True)
+        else:
+            self._app.rut_usuario_seleccionado = None
+            self._toggle_botones(activar=False)
+
+    def _toggle_botones(self, activar: bool):
+        if activar:
+            self._btn_editar.config(state="normal")
+            self._btn_eliminar.config(state="normal")
+        else:
+            self._btn_editar.config(state="disabled")
+            self._btn_eliminar.config(state="disabled")
 
     def _limpiar_busqueda(self):
         self._buscador.delete(0, tk.END)
