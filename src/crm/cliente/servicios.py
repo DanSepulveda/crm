@@ -1,4 +1,12 @@
+from dataclasses import dataclass
+
 from .repositorio import RepositorioCliente
+
+
+@dataclass
+class RespuestaServicio:
+    exito: bool
+    mensaje: str
 
 
 class ServicioCliente:
@@ -22,3 +30,15 @@ class ServicioCliente:
             or busqueda in c.nombre_completo.lower()
             or busqueda in c.rut.lower()
         ]
+
+    def eliminar_cliente(self, rut: str) -> RespuestaServicio:
+        eliminado = self._repo.eliminar_uno(rut)
+
+        if not eliminado:
+            return RespuestaServicio(
+                exito=False, mensaje="Cliente no encontrado."
+            )
+
+        return RespuestaServicio(
+            exito=True, mensaje="Cliente eliminado correctamente."
+        )

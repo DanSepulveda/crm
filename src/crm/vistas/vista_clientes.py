@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import messagebox, ttk
 from typing import TYPE_CHECKING, Literal
 
 
@@ -105,7 +105,7 @@ class VistaClientes(ttk.Frame):
             width=15,
             state="disabled",
             style="Custom.TButton",
-            # command=lambda: self._navegar_a("x"),
+            command=self._handle_eliminar,
         )
         self._btn_eliminar.pack(pady=(0, 10))
 
@@ -158,6 +158,24 @@ class VistaClientes(ttk.Frame):
         else:
             self._app.rut_usuario_seleccionado = None
             self._toggle_botones(activar=False)
+
+    def _handle_eliminar(self):
+        rut = self._app._rut_usuario_seleccionado
+
+        if rut is None:
+            return
+
+        confirmar = messagebox.askokcancel(
+            "Confirmar eliminación",
+            "¿Seguro que desea eliminar al cliente seleccionado?",
+        )
+        if confirmar:
+            respuesta = self._app._servicio_cliente.eliminar_cliente(rut)
+            if respuesta.exito:
+                self._refrescar_tabla()
+                messagebox.showinfo("OK", respuesta.mensaje)
+            else:
+                messagebox.showerror("Error", respuesta.mensaje)
 
     def _toggle_botones(self, activar: bool):
         if activar:
