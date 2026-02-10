@@ -1,3 +1,3 @@
 # ruff: noqa: F401
 # type: ignore
-from .modelo import DictDireccion, Direccion, Regiones
+from .modelo import DictDireccion, Direccion
