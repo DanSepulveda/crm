@@ -36,7 +36,7 @@ class Cliente:
 
     @classmethod
     def _validar_y_formatear_rut(cls, rut: str) -> str:
-        """Valida un RUT y lo retorna con un formato único."""
+        """Valida un RUT y lo retorna con un formato estándar."""
         rut = rut.replace(".", "").replace(" ", "").upper()
 
         if not cls._es_rut_valido(rut):
@@ -53,7 +53,7 @@ class Cliente:
 
     @staticmethod
     def _es_rut_valido(rut: str) -> bool:
-        """Verifica la validez del RUT indicado."""
+        """Verifica la validez del RUT indicado con algoritmo módulo 11"""
         if not rut:
             return False
 
@@ -74,7 +74,7 @@ class Cliente:
         return digito_verificador == str(resultado)
 
     @staticmethod
-    def _validar_nombre(valor: str, nombre_campo: str) -> str:
+    def _validar_texto(valor: str, nombre_campo: str) -> str:
         """Retorna texto formateado luego de validarlo (para nombres y apellidos.)"""
         if not valor or not valor.strip():
             raise ValueError(f"{nombre_campo} es obligatorio.")
@@ -85,7 +85,7 @@ class Cliente:
             raise ValueError(f"{nombre_campo}: mínimo 2 caracteres")
 
         if len(valor) > 50:
-            raise ValueError(f"{nombre_campo}: Demasiado largo.")
+            raise ValueError(f"{nombre_campo}: demasiado largo.")
 
         if not valor.replace(" ", "").isalpha():
             raise ValueError(f"{nombre_campo}: solo letras y espacios.")
@@ -108,7 +108,7 @@ class Cliente:
 
     @nombres.setter
     def nombres(self, nuevo_nombre: str):
-        self._nombres = self._validar_nombre(
+        self._nombres = self._validar_texto(
             nuevo_nombre, nombre_campo="Nombres"
         )
 
@@ -118,7 +118,7 @@ class Cliente:
 
     @apellido_paterno.setter
     def apellido_paterno(self, nuevo_apellido: str):
-        self._apellido_paterno = self._validar_nombre(
+        self._apellido_paterno = self._validar_texto(
             nuevo_apellido, nombre_campo="Apellido Paterno"
         )
 
@@ -128,7 +128,7 @@ class Cliente:
 
     @apellido_materno.setter
     def apellido_materno(self, nuevo_apellido):
-        self._apellido_materno = self._validar_nombre(
+        self._apellido_materno = self._validar_texto(
             nuevo_apellido, nombre_campo="Apellido Materno"
         )
 
