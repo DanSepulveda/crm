@@ -1,7 +1,7 @@
 import re
 from itertools import cycle
 
-from src.crm.direccion import Direccion
+from src.crm.direccion import DictDireccion, Direccion
 
 
 class Cliente:
@@ -15,7 +15,7 @@ class Cliente:
         apellido_materno: str,
         correo: str,
         telefono: str,
-        direccion: Direccion,
+        direccion: DictDireccion,
     ):
         self._rut = self._validar_y_formatear_rut(rut)
         self.nombres = nombres
@@ -23,7 +23,7 @@ class Cliente:
         self.apellido_materno = apellido_materno
         self.correo = correo
         self.telefono = telefono
-        self.direccion = direccion
+        self.direccion = Direccion(**direccion)
 
     def __str__(self) -> str:
         return f"Cliente {self.TIPO} - {self.nombre_completo}"
@@ -39,17 +39,13 @@ class Cliente:
         """Valida un RUT y lo retorna con un formato estándar."""
         rut = rut.replace(".", "").replace(" ", "").upper()
 
+        if not rut:
+            raise ValueError("Debe indicar el RUT.")
+
         if not cls._es_rut_valido(rut):
             raise ValueError("RUT inválido.")
 
         return rut
-
-    @classmethod
-    def desde_dict(cls, datos: dict):
-        """Crea una instancia de la clase a partir de un diccionario."""
-        datos = datos.copy()
-        datos["direccion"] = Direccion.desde_dict(datos["direccion"])
-        return cls(**datos)
 
     @staticmethod
     def _es_rut_valido(rut: str) -> bool:
@@ -75,20 +71,22 @@ class Cliente:
 
     @staticmethod
     def _validar_texto(valor: str, nombre_campo: str) -> str:
-        """Retorna texto formateado luego de validarlo (para nombres y apellidos.)"""
+        """Retorna texto formateado luego de validarlo (para nombres y apellidos)."""
         if not valor or not valor.strip():
-            raise ValueError(f"{nombre_campo} es obligatorio.")
+            raise ValueError(f"Debe indicar el {nombre_campo}.")
 
         valor = " ".join(valor.strip().split())
 
         if len(valor) < 2:
-            raise ValueError(f"{nombre_campo}: mínimo 2 caracteres")
+            error = f"{nombre_campo} debe tener al menos 2 caracteres."
+            raise ValueError(error)
 
         if len(valor) > 50:
-            raise ValueError(f"{nombre_campo}: demasiado largo.")
+            raise ValueError(f"{nombre_campo} es demasiado largo.")
 
         if not valor.replace(" ", "").isalpha():
-            raise ValueError(f"{nombre_campo}: solo letras y espacios.")
+            error = f"{nombre_campo} solo puede incluir letras y espacios."
+            raise ValueError(error)
 
         return valor.title()
 
@@ -109,7 +107,7 @@ class Cliente:
     @nombres.setter
     def nombres(self, nuevo_nombre: str):
         self._nombres = self._validar_texto(
-            nuevo_nombre, nombre_campo="Nombres"
+            nuevo_nombre, nombre_campo="Nombre"
         )
 
     @property
@@ -140,6 +138,9 @@ class Cliente:
     def correo(self, nuevo_correo: str):
         nuevo_correo = nuevo_correo.strip().lower()
 
+        if not nuevo_correo:
+            raise ValueError("Debe indicar el correo.")
+
         if not re.fullmatch(r"[\w\.-]+@[\w\.-]+\.\w{2,}", nuevo_correo):
             raise ValueError("Correo inválido.")
 
@@ -152,6 +153,9 @@ class Cliente:
     @telefono.setter
     def telefono(self, nuevo_telefono: str):
         nuevo_telefono = nuevo_telefono.strip().replace(" ", "")
+
+        if not nuevo_telefono:
+            raise ValueError("Debe indicar el teléfono.")
 
         if not re.fullmatch(r"(?:\+?56)?9\d{8}", nuevo_telefono):
             raise ValueError("Teléfono inválido.")
@@ -174,8 +178,8 @@ class Cliente:
 
         self._direccion = nueva_direccion
 
-    def a_dict(self):
-        """Retorna el objeto Cliente en formato dict"""
+    def a_diccionario(self) -> dict:
+        """Retorna un Cliente en formato diccionario."""
         return {
             "tipo": self.TIPO,
             "rut": self.rut,
@@ -184,5 +188,5 @@ class Cliente:
             "apellido_materno": self.apellido_materno,
             "correo": self.correo,
             "telefono": self.telefono,
-            "direccion": self.direccion.a_dict(),
+            "direccion": self.direccion.a_diccionario(),
         }
