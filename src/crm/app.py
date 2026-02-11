@@ -59,3 +59,14 @@ class App(tk.Tk):
         if not vista:
             raise ValueError(f"Vista '{nombre_vista}' no existe.")
         vista.tkraise()
+
+        if hasattr(vista, "resetear"):
+            vista.resetear()
+
+    def mostrar_formulario_creacion(self):
+        form = self._vistas["VistaFormulario"]
+        form.preparar_creacion()
+        form.tkraise()
+
+    def mostrar_formulario_edicion(self):
+        pass

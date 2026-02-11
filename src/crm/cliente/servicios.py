@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from . import ClienteCorporativo, ClientePremium, ClienteRegular
 from .repositorio import RepositorioCliente
 
 
@@ -10,6 +11,12 @@ class RespuestaServicio:
 
 
 class ServicioCliente:
+    _MAPA_TIPOS = {
+        "Regular": ClienteRegular,
+        "Premium": ClientePremium,
+        "Corporativo": ClienteCorporativo,
+    }
+
     def __init__(self, repositorio: RepositorioCliente):
         self._repo = repositorio
 
@@ -35,10 +42,33 @@ class ServicioCliente:
         eliminado = self._repo.eliminar_uno(rut)
 
         if not eliminado:
-            return RespuestaServicio(
-                exito=False, mensaje="Cliente no encontrado."
-            )
+            return RespuestaServicio(False, "Cliente no encontrado.")
 
-        return RespuestaServicio(
-            exito=True, mensaje="Cliente eliminado correctamente."
-        )
+        return RespuestaServicio(True, "Cliente eliminado correctamente.")
+
+    def registrar_cliente(self, datos) -> RespuestaServicio:
+        try:
+            datos = datos.copy()
+
+            existe_usuario = self._repo.buscar_por_rut(datos["rut"])
+            if existe_usuario:
+                raise ValueError("El RUT ya se encuentra registrado.")
+
+            direccion = {
+                "calle": datos.pop("calle"),
+                "numero": datos.pop("numero"),
+                "region": datos.pop("region"),
+                "comuna": datos.pop("comuna"),
+            }
+            datos["direccion"] = direccion
+            tipo = datos.pop("tipo", "Regular")
+
+            clase = self._MAPA_TIPOS.get(tipo)
+            if not clase:
+                return RespuestaServicio(False, "Tipo de cliente inválido.")
+
+            cliente = clase(**datos)
+            self._repo.crear_uno(cliente)
+            return RespuestaServicio(True, "Cliente creado correctamente.")
+        except ValueError as e:
+            return RespuestaServicio(False, str(e))

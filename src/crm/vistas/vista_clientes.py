@@ -74,8 +74,8 @@ class VistaClientes(ttk.Frame):
             )
             self._tabla.heading(nombre, text=nombre)
 
-        self._buscador.bind("<KeyRelease>", self._handle_busqueda)
-        self._tabla.bind("<<TreeviewSelect>>", self._handle_click_fila)
+        self._buscador.bind("<KeyRelease>", self._onchange_busqueda)
+        self._tabla.bind("<<TreeviewSelect>>", self._onclick_fila)
         self._refrescar_tabla()
 
         # -------------------- FRAME BOTONES (DERECHA) ------------------------
@@ -86,7 +86,7 @@ class VistaClientes(ttk.Frame):
             frame_opciones,
             text="Crear Usuario",
             width=15,
-            command=lambda: self._navegar_a("VistaFormulario"),
+            command=self._app.mostrar_formulario_creacion,
         ).pack(pady=(0, 10))
 
         self._btn_editar = ttk.Button(
@@ -95,7 +95,7 @@ class VistaClientes(ttk.Frame):
             width=15,
             state="disabled",
             style="Custom.TButton",
-            # command=lambda: self._navegar_a("x"),
+            command=self._app.mostrar_formulario_edicion,
         )
         self._btn_editar.pack(pady=(0, 10))
 
@@ -105,7 +105,7 @@ class VistaClientes(ttk.Frame):
             width=15,
             state="disabled",
             style="Custom.TButton",
-            command=self._handle_eliminar,
+            command=self._onclick_eliminar,
         )
         self._btn_eliminar.pack(pady=(0, 10))
 
@@ -113,11 +113,17 @@ class VistaClientes(ttk.Frame):
             frame_opciones,
             text="Volver al inicio",
             width=15,
-            command=lambda: self._navegar_a("VistaInicio"),
+            command=lambda: self._app._mostrar_vista("VistaInicio"),
         ).pack(pady=(40, 0))
 
+    def resetear(self):
+        self._buscador.delete(0, tk.END)
+        self._refrescar_tabla()
+
     def _refrescar_tabla(self, busqueda: str = ""):
-        self._tabla.delete(*self._tabla.get_children())
+        """Rellena la tabla con los clientes resultantes de la búsqueda."""
+        self._tabla.delete(*self._tabla.get_children())  # limpia la tabla
+
         clientes = self._app._servicio_cliente.obtener_todos()
         filtrados = self._app._servicio_cliente.obtener_filtrados(busqueda)
 
@@ -128,6 +134,7 @@ class VistaClientes(ttk.Frame):
         else:
             titulo = f"Mostrando {len(filtrados)} de {len(clientes)} clientes."
 
+            # se rellena la tabla con los clientes filtrados
             for i, c in enumerate(filtrados, 1):
                 self._tabla.insert(
                     "",
@@ -143,25 +150,30 @@ class VistaClientes(ttk.Frame):
                 )
         self._titulo.config(text=titulo)
 
-    def _handle_busqueda(self, _):
+    def _onchange_busqueda(self, _):
+        """Refresca la tabla cada vez que se escribe en el buscador."""
         busqueda = self._buscador.get()
         self._refrescar_tabla(busqueda)
 
-    def _handle_click_fila(self, _):
+    def _onclick_fila(self, _):
+        """Activa/desactiva botones dependiendo si hay una fila seleccionada."""
         seleccion = self._tabla.selection()
 
         if seleccion:
             id_item = seleccion[0]
             rut_elegido: str = self._tabla.item(id_item, "values")[2].strip()
             self._app.rut_usuario_seleccionado = rut_elegido
-            self._toggle_botones(activar=True)
+            estado = "normal"
         else:
             self._app.rut_usuario_seleccionado = None
-            self._toggle_botones(activar=False)
+            estado = "disabled"
 
-    def _handle_eliminar(self):
-        rut = self._app._rut_usuario_seleccionado
+        self._btn_editar.config(state=estado)
+        self._btn_eliminar.config(state=estado)
 
+    def _onclick_eliminar(self):
+        """Ejecuta el servicio de eliminación, previa confirmación."""
+        rut = self._app.rut_usuario_seleccionado
         if rut is None:
             return
 
@@ -172,23 +184,8 @@ class VistaClientes(ttk.Frame):
         if confirmar:
             respuesta = self._app._servicio_cliente.eliminar_cliente(rut)
             if respuesta.exito:
-                self._refrescar_tabla()
+                busqueda = self._buscador.get()
+                self._refrescar_tabla(busqueda)
                 messagebox.showinfo("OK", respuesta.mensaje)
             else:
                 messagebox.showerror("Error", respuesta.mensaje)
-
-    def _toggle_botones(self, activar: bool):
-        if activar:
-            self._btn_editar.config(state="normal")
-            self._btn_eliminar.config(state="normal")
-        else:
-            self._btn_editar.config(state="disabled")
-            self._btn_eliminar.config(state="disabled")
-
-    def _limpiar_busqueda(self):
-        self._buscador.delete(0, tk.END)
-        self._refrescar_tabla()
-
-    def _navegar_a(self, vista: str):
-        self._limpiar_busqueda()
-        self._app._mostrar_vista(vista)

@@ -2,41 +2,56 @@ from pathlib import Path
 
 from src.crm.utilidades import GestorArchivos
 
-from .cliente_corporativo import ClienteCorporativo
-from .cliente_premium import ClientePremium
-from .cliente_regular import ClienteRegular
+from . import ClienteCorporativo, ClientePremium, ClienteRegular
 
 
 class RepositorioCliente:
     _PATH = Path(__file__).resolve().parent / "clientes.json"
 
     def __init__(self):
-        self._clientes = GestorArchivos.leer_json(self._PATH, default=[])
+        datos = GestorArchivos.leer_json(self._PATH, default=[])
+        self._clientes = [self._crear_cliente(d) for d in datos]
 
     def _crear_cliente(self, cliente):
+        """Crea un objeto Cliente a partir de su forma diccionario."""
         cliente = cliente.copy()
-        tipo = cliente.pop("tipo", "Genérico")
+        tipo = cliente.pop("tipo", "Regular")
 
         if tipo == "Premium":
-            return ClientePremium.desde_dict(cliente)
+            return ClientePremium(**cliente)
         if tipo == "Corporativo":
-            return ClienteCorporativo.desde_dict(cliente)
-        return ClienteRegular.desde_dict(cliente)
+            return ClienteCorporativo(**cliente)
+        return ClienteRegular(**cliente)
+
+    def _guardar(self):
+        """Convierte los Clientes a formato JSON y los persiste en fichero."""
+        datos = [cliente.a_diccionario() for cliente in self._clientes]
+        GestorArchivos.guardar_json(self._PATH, datos)
 
     def obtener_todos(self):
-        return [self._crear_cliente(data) for data in self._clientes]
+        """Retorna una lista con todos los clientes registrados."""
+        return self._clientes
 
     def buscar_por_rut(self, rut: str):
-        cliente = next((c for c in self._clientes if c["rut"] == rut), None)
-        return self._crear_cliente(cliente) if cliente else None
+        """Retorna el Cliente que posee el RUT indicado."""
+        cliente = next((c for c in self._clientes if c.rut == rut), None)
+        return cliente
 
     def eliminar_uno(self, rut: str):
+        """Elimina el Cliente con el RUT indicado."""
         cantidad_original = len(self._clientes)
 
-        self._clientes = [c for c in self._clientes if c["rut"] != rut]
+        self._clientes = [c for c in self._clientes if c.rut != rut]
 
         if len(self._clientes) == cantidad_original:
             return False
 
-        GestorArchivos.guardar_json(self._PATH, self._clientes)
+        self._guardar()
         return True
+
+    def crear_uno(
+        self, cliente: ClienteCorporativo | ClientePremium | ClienteRegular
+    ):
+        """Registra un nuevo Cliente en el sistema."""
+        self._clientes.append(cliente)
+        self._guardar()

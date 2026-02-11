@@ -1,6 +1,6 @@
 import platform
 import tkinter as tk
-from tkinter import ttk
+from tkinter import messagebox, ttk
 from typing import TYPE_CHECKING
 
 from src.crm.cliente import Direccion
@@ -13,11 +13,19 @@ if TYPE_CHECKING:
     from src.crm.app import App
 
 
+def esta_vacio(dic: dict) -> bool:
+    return all(
+        esta_vacio(v) if isinstance(v, dict) else not v for v in dic.values()
+    )
+
+
 class VistaFormulario(ttk.Frame):
     def __init__(self, padre, app: "App"):
         super().__init__(padre)
         self._app = app
         self._campos = {}
+        self._modo_edicion = False
+        self._cliente_actual = None
         regiones = Direccion.obtener_regiones()
 
         # Configuración de filas y columnas para centrar el formulario
@@ -65,7 +73,7 @@ class VistaFormulario(ttk.Frame):
         self._campos["rut"] = Ctk.campo(
             fr_info, "RUT", columna=0, fila=0, mb=True
         )
-        self._campos["nombre"] = Ctk.campo(
+        self._campos["nombres"] = Ctk.campo(
             fr_info, "Nombres", columna=1, fila=0, mb=True
         )
         self._campos["apellido_paterno"] = Ctk.campo(
@@ -117,11 +125,11 @@ class VistaFormulario(ttk.Frame):
         fr_botones.pack(fill="x", expand=True)
 
         ttk.Button(
-            fr_botones, text="Crear usuario", command=self._handle_guardar
+            fr_botones, text="Crear usuario", command=self._onclick_guardar
         ).pack(side="right")
 
         ttk.Button(
-            fr_botones, text="Cancelar", command=self._handle_cancelar
+            fr_botones, text="Cancelar", command=self._onclick_cancelar
         ).pack(side="right", padx=10)
 
         # ------------------------------ EVENTOS ------------------------------
@@ -144,40 +152,74 @@ class VistaFormulario(ttk.Frame):
         )
 
         # - configuración para que el scroll funcione con la rueda del mouse
-        self.canvas.bind_all("<MouseWheel>", self._handle_scroll)
+        self.canvas.bind_all("<MouseWheel>", self._onscroll)
 
-        # ----------------------------- FIN INIT ------------------------------
+    def preparar_creacion(self):
+        self._modo_edicion = False
+        self._cliente_actual = None
+        self._limpiar_formulario()
 
     def _actualizar_comunas(self, _):
+        """Cambia las opciones de comunas al momento de cambiar la región."""
         region: str = self._campos["region"].get()
         comunas = Direccion.obtener_comunas_por_region(region)
         self._campos["comuna"]["values"] = comunas
         self._campos["comuna"].set("")
 
     def _leer_formulario(self) -> dict:
+        """Retorna un diccionario con los datos del formulario."""
         return {clave: widget.get() for clave, widget in self._campos.items()}
 
-    def _handle_guardar(self):
-        formulario = self._leer_formulario()
-        print(formulario)
+    def _limpiar_formulario(self):
+        """Limpia todos los campos del formulario."""
+        for campo in self._campos.values():
+            if isinstance(campo, ttk.Combobox):
+                campo.set("")
+            else:
+                campo.delete(0, tk.END)
 
-        # try:
-        #     if any(e == "" for e in entradas.values()):
-        #         raise ValueError("Todos los campos son obligatorios.")
-        #     respuesta = self.app.servicio_cliente.registrar_cliente(**entradas)
-        #     print(respuesta)
-        # except ValueError as e:
-        #     self.label_estado.config(text=str(e))
-
-    def _handle_cancelar(self):
-        pass
-
-    def _handle_scroll(self, evento):
+    def _onscroll(self, evento):
+        """Controla la velocidad del scroll al usar la rueda del mouse."""
         os = platform.system()
         factor = evento.delta / 120 if os == "Windows" else evento.delta
         self.canvas.yview_scroll(int(-1 * factor), "units")
 
+    def _onclick_guardar(self):
+        """Ejecuta el servicio de creación/edición de cliente."""
+        datos = self._leer_formulario()
+
+        if self._modo_edicion:
+            # TODO
+            # respuesta = self._app._servicio_cliente.editar_cliente(datos)
+            pass
+        else:
+            respuesta = self._app._servicio_cliente.registrar_cliente(datos)
+
+        if respuesta.exito:
+            messagebox.showinfo("OK", respuesta.mensaje)
+            self._limpiar_formulario()
+            self._app._mostrar_vista("VistaClientes")
+        else:
+            messagebox.showerror("ERROR", respuesta.mensaje)
+
+    def _onclick_cancelar(self):
+        """Redirige al menú principal, validando que no hayan datos sin guardar."""
+        if self._modo_edicion:
+            # TODO
+            pass
+        else:
+            form_vacio = esta_vacio(self._leer_formulario())
+            if not form_vacio:
+                confirmar = messagebox.askokcancel(
+                    "Advertencia",
+                    "Tiene datos sin guardar. Si continúa, se eliminarán.",
+                )
+                if not confirmar:
+                    return
+        self._app._mostrar_vista("VistaClientes")
+
     def _generar_campo_cliente(self, _):
+        """Agrega un campo para un atributo, dependiendo del tipo de cliente."""
         tipo = self._campos["tipo"].get()
         tipos = {
             "Regular": ("puntos", "Puntos disponibles"),
@@ -194,4 +236,3 @@ class VistaFormulario(ttk.Frame):
         self._campos[tipo[0]] = Ctk.campo(
             self.fr_atributos, tipo[1], columna=1, fila=0
         )
-        print(self._campos.keys())
