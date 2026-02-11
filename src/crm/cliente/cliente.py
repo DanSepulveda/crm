@@ -53,6 +53,7 @@ class Cliente:
         if not rut:
             return False
 
+        # Regex para validar que hayan 7-8 dígitos, seguidos de guión, seguido de 1 dígito o K
         if not re.match(r"^\d{7,8}-[\dK]$", rut):
             return False
 
@@ -141,6 +142,9 @@ class Cliente:
         if not nuevo_correo:
             raise ValueError("Debe indicar el correo.")
 
+        # Regex para validar texto o símbolos válidos (punto, guión, guión bajo)
+        # segudo de @, seguido de texto o símbolos validos, seguido de punto
+        # seguido de al menos 2 letras
         if not re.fullmatch(r"[\w\.-]+@[\w\.-]+\.\w{2,}", nuevo_correo):
             raise ValueError("Correo inválido.")
 
@@ -157,9 +161,12 @@ class Cliente:
         if not nuevo_telefono:
             raise ValueError("Debe indicar el teléfono.")
 
+        # Regex para validar que opcionalmente comience con 56 o con +56
+        # seguido de 9, seguido de 8 dígitos
         if not re.fullmatch(r"(?:\+?56)?9\d{8}", nuevo_telefono):
             raise ValueError("Teléfono inválido.")
 
+        # dependiendo del ingreso, se tranforma a formato final +56912345678
         if nuevo_telefono.startswith("9"):
             nuevo_telefono = "+56" + nuevo_telefono
         elif nuevo_telefono.startswith("56"):
