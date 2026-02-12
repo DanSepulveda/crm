@@ -1,19 +1,19 @@
 [
   {
-    "tipo": "Regular",
-    "rut": "11342678-0",
-    "nombres": "Juan Pablo",
-    "apellido_paterno": "Pérez",
-    "apellido_materno": "García",
-    "correo": "juan.perez@email.com",
-    "telefono": "+56984729103",
+    "tipo": "Corporativo",
+    "rut": "12884321-3",
+    "nombres": "Julián",
+    "apellido_paterno": "Zaldívar",
+    "apellido_materno": "Lorca",
+    "correo": "jzaldivar@logistica-austral.cl",
+    "telefono": "+56944332211",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "O'Higgins",
+      "numero": "450",
+      "region": "Región de Ñuble",
+      "comuna": "Chillán"
     },
-    "puntos": 1250
+    "limite_credito": 5800000
   },
   {
     "tipo": "Premium",
@@ -24,10 +24,10 @@
     "correo": "m.soto@email.com",
     "telefono": "+56966384021",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Avenida del Mar",
+      "numero": "120",
+      "region": "Región de Coquimbo",
+      "comuna": "La Serena"
     },
     "porcentaje_descuento": 0.35
   },
@@ -40,12 +40,11 @@
     "correo": "contacto@techcorp.cl",
     "telefono": "+56955038192",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Prat",
+      "numero": "450",
+      "region": "Región de Antofagasta",
+      "comuna": "Antofagasta"
     },
-    "razon_social": "Tecnologías Globales SpA",
     "limite_credito": 4500000
   },
   {
@@ -57,10 +56,10 @@
     "correo": "fran.munoz@email.com",
     "telefono": "+56994820173",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Pinto",
+      "numero": "892",
+      "region": "Región de Ñuble",
+      "comuna": "Chillán"
     },
     "puntos": 4820
   },
@@ -73,10 +72,10 @@
     "correo": "a.castro@gmail.com",
     "telefono": "+56933019284",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Uno Oriente",
+      "numero": "1045",
+      "region": "Región del Maule",
+      "comuna": "Talca"
     },
     "porcentaje_descuento": 0.15
   },
@@ -89,12 +88,11 @@
     "correo": "vpinto@logistica-norte.cl",
     "telefono": "+56977102938",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Avenida Alemania",
+      "numero": "0310",
+      "region": "Región de la Araucanía",
+      "comuna": "Temuco"
     },
-    "razon_social": "Logística del Norte S.A.",
     "limite_credito": 8200000
   },
   {
@@ -106,10 +104,10 @@
     "correo": "seba.tapia@outlook.com",
     "telefono": "+56944837201",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Baquedano",
+      "numero": "55",
+      "region": "Región de Tarapacá",
+      "comuna": "Iquique"
     },
     "puntos": 315
   },
@@ -122,10 +120,10 @@
     "correo": "cami.h@gmail.com",
     "telefono": "+56966102934",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Libertad",
+      "numero": "1140",
+      "region": "Región de Valparaíso",
+      "comuna": "Viña del Mar"
     },
     "porcentaje_descuento": 0.48
   },
@@ -138,12 +136,11 @@
     "correo": "ventas@minera-andes.cl",
     "telefono": "+56988273645",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Picarte",
+      "numero": "1800",
+      "region": "Región de Los Ríos",
+      "comuna": "Valdivia"
     },
-    "razon_social": "Minera Los Andes Ltda",
     "limite_credito": 10000000
   },
   {
@@ -155,10 +152,10 @@
     "correo": "javis@email.com",
     "telefono": "+56911228833",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "O'Higgins",
+      "numero": "742",
+      "region": "Región del Biobío",
+      "comuna": "Concepción"
     },
     "puntos": 2740
   },
@@ -171,10 +168,10 @@
     "correo": "f.vargas@yahoo.cl",
     "telefono": "+56955449900",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Bulnes",
+      "numero": "12",
+      "region": "Región de Magallanes y de la Antártica Chilena",
+      "comuna": "Punta Arenas"
     },
     "puntos": 890
   },
@@ -187,10 +184,10 @@
     "correo": "anto.c@live.com",
     "telefono": "+56977221166",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
+      "calle": "Apoquindo",
+      "numero": "4800",
       "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "comuna": "Las Condes"
     },
     "porcentaje_descuento": 0.22
   },
@@ -203,12 +200,11 @@
     "correo": "gerencia@agro-valle.cl",
     "telefono": "+56933887722",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "San Martín",
+      "numero": "320",
+      "region": "Región de Atacama",
+      "comuna": "Copiapó"
     },
-    "razon_social": "AgroIndustrial Valle Central",
     "limite_credito": 3500000
   },
   {
@@ -220,10 +216,10 @@
     "correo": "dani.m@email.com",
     "telefono": "+56988445511",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
+      "calle": "Vicuña Mackenna",
+      "numero": "88",
       "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "comuna": "Providencia"
     },
     "puntos": 150
   },
@@ -236,10 +232,10 @@
     "correo": "g.reyes@empresa.com",
     "telefono": "+56922993388",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Angelmó",
+      "numero": "2100",
+      "region": "Región de Los Lagos",
+      "comuna": "Puerto Montt"
     },
     "porcentaje_descuento": 0.5
   },
@@ -252,12 +248,11 @@
     "correo": "v.toro@constructora-mar.cl",
     "telefono": "+56944770022",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Eusebio Lillo",
+      "numero": "14",
+      "region": "Región Aysén del Gral. Carlos Ibáñez del Campo",
+      "comuna": "Coyhaique"
     },
-    "razon_social": "Constructora del Mar SpA",
     "limite_credito": 6700000
   },
   {
@@ -269,10 +264,10 @@
     "correo": "czuniga@gmail.com",
     "telefono": "+56966115544",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Cuevas",
+      "numero": "102",
+      "region": "Región del Libertador Gral. Bernardo O’Higgins",
+      "comuna": "Rancagua"
     },
     "puntos": 3310
   },
@@ -285,10 +280,10 @@
     "correo": "lore.farias@email.com",
     "telefono": "+56911337744",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "General Mackenna",
+      "numero": "332",
+      "region": "Región de la Araucanía",
+      "comuna": "Villarrica"
     },
     "porcentaje_descuento": 0.28
   },
@@ -301,12 +296,11 @@
     "correo": "mbravo@retailchile.cl",
     "telefono": "+56955882299",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Alvarez",
+      "numero": "234",
+      "region": "Región de Valparaíso",
+      "comuna": "Quilpué"
     },
-    "razon_social": "Servicios de Retail Chile Ltda",
     "limite_credito": 1200000
   },
   {
@@ -318,10 +312,10 @@
     "correo": "n.vasquez@gmail.com",
     "telefono": "+56933661100",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "21 de Mayo",
+      "numero": "660",
+      "region": "Región de Arica y Parinacota",
+      "comuna": "Arica"
     },
     "puntos": 4900
   },
@@ -334,10 +328,10 @@
     "correo": "emiranda@outlook.com",
     "telefono": "+56977441188",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Caupolicán",
+      "numero": "151",
+      "region": "Región de Los Ríos",
+      "comuna": "La Unión"
     },
     "puntos": 2100
   },
@@ -350,10 +344,10 @@
     "correo": "bsanhueza@gmail.com",
     "telefono": "+56944993322",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Bories",
+      "numero": "990",
+      "region": "Región de Magallanes y de la Antártica Chilena",
+      "comuna": "Porvenir"
     },
     "porcentaje_descuento": 0.42
   },
@@ -366,12 +360,11 @@
     "correo": "hnavarrete@transporte-rapido.cl",
     "telefono": "+56922884477",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Blanco Encalada",
+      "numero": "44",
+      "region": "Región de Valparaíso",
+      "comuna": "San Antonio"
     },
-    "razon_social": "Transportes Rápido y Seguro SpA",
     "limite_credito": 900000
   },
   {
@@ -383,10 +376,10 @@
     "correo": "aolivares@email.com",
     "telefono": "+56988116633",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Chorrillos",
+      "numero": "712",
+      "region": "Región de Atacama",
+      "comuna": "Vallenar"
     },
     "puntos": 650
   },
@@ -399,10 +392,10 @@
     "correo": "pgallardo@gmail.com",
     "telefono": "+56911559900",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
+      "calle": "Paseo Huérfanos",
+      "numero": "1160",
       "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "comuna": "Santiago"
     },
     "porcentaje_descuento": 0.12
   },
@@ -415,12 +408,11 @@
     "correo": "cpalacios@textil-sur.cl",
     "telefono": "+56933114477",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Baquedano",
+      "numero": "402",
+      "region": "Región de Antofagasta",
+      "comuna": "Calama"
     },
-    "razon_social": "Manufacturas Textil Sur S.A.",
     "limite_credito": 2800000
   },
   {
@@ -432,10 +424,10 @@
     "correo": "gespejo@outlook.cl",
     "telefono": "+56966883311",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Michimalonco",
+      "numero": "881",
+      "region": "Región del Biobío",
+      "comuna": "San Pedro de la Paz"
     },
     "puntos": 1150
   },
@@ -448,10 +440,10 @@
     "correo": "m.riveros@email.com",
     "telefono": "+56977002255",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
+      "calle": "Camino a Farellones",
+      "numero": "15400",
       "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "comuna": "Lo Barnechea"
     },
     "porcentaje_descuento": 0.3
   },
@@ -464,12 +456,11 @@
     "correo": "abustamante@energia-solar.cl",
     "telefono": "+56944119966",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Los Carrera",
+      "numero": "90",
+      "region": "Región del Maule",
+      "comuna": "Curicó"
     },
-    "razon_social": "Energía Solar Futura Ltda",
     "limite_credito": 5400000
   },
   {
@@ -481,10 +472,10 @@
     "correo": "s.campos@gmail.com",
     "telefono": "+56922558833",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Gabriela Mistral",
+      "numero": "550",
+      "region": "Región de Coquimbo",
+      "comuna": "Vicuña"
     },
     "puntos": 3950
   },
@@ -497,10 +488,10 @@
     "correo": "r.guerrero@email.cl",
     "telefono": "+56999331100",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Aníbal Pinto",
+      "numero": "12",
+      "region": "Región del Biobío",
+      "comuna": "Talcahuano"
     },
     "puntos": 15
   },
@@ -513,10 +504,10 @@
     "correo": "n.valdes@yahoo.com",
     "telefono": "+56911884477",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Paseo de la Victoria",
+      "numero": "301",
+      "region": "Región de Valparaíso",
+      "comuna": "Concón"
     },
     "porcentaje_descuento": 0.45
   },
@@ -529,12 +520,11 @@
     "correo": "ventas@frutos-chile.cl",
     "telefono": "+56955227744",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
+      "calle": "Diego de Almagro",
+      "numero": "100",
       "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "comuna": "Ñuñoa"
     },
-    "razon_social": "Exportadora Frutos de Chile",
     "limite_credito": 7100000
   },
   {
@@ -546,10 +536,10 @@
     "correo": "k.suarez@gmail.com",
     "telefono": "+56933771100",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Ramón Picarte",
+      "numero": "1240",
+      "region": "Región de Los Ríos",
+      "comuna": "Valdivia"
     },
     "puntos": 1800
   },
@@ -562,10 +552,10 @@
     "correo": "h.barrera@outlook.com",
     "telefono": "+56966442299",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Eleuterio Ramírez",
+      "numero": "850",
+      "region": "Región de Los Lagos",
+      "comuna": "Osorno"
     },
     "porcentaje_descuento": 0.19
   },
@@ -578,12 +568,11 @@
     "correo": "contacto@vinos-andes.cl",
     "telefono": "+56922660033",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Colón",
+      "numero": "512",
+      "region": "Región de Coquimbo",
+      "comuna": "Ovalle"
     },
-    "razon_social": "Viñedos de los Andes SpA",
     "limite_credito": 9500000
   },
   {
@@ -595,10 +584,10 @@
     "correo": "m.ibarra@gmail.com",
     "telefono": "+56988339911",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Latorre",
+      "numero": "67",
+      "region": "Región de Antofagasta",
+      "comuna": "Mejillones"
     },
     "puntos": 420
   },
@@ -611,10 +600,10 @@
     "correo": "sofi.oyarzun@email.com",
     "telefono": "+56944110077",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "San Marcos",
+      "numero": "210",
+      "region": "Región de Arica y Parinacota",
+      "comuna": "Arica"
     },
     "porcentaje_descuento": 0.33
   },
@@ -627,12 +616,11 @@
     "correo": "operaciones@pesquera-sur.cl",
     "telefono": "+56977229944",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Urmeneta",
+      "numero": "312",
+      "region": "Región de Los Lagos",
+      "comuna": "Puerto Varas"
     },
-    "razon_social": "Pesquera del Sur Austral S.A.",
     "limite_credito": 3000000
   },
   {
@@ -644,10 +632,10 @@
     "correo": "conny.parra@gmail.com",
     "telefono": "+56933550022",
     "direccion": {
-      "calle": "lo espejo",
-      "numero": "0186",
-      "region": "Región Metropolitana de Santiago",
-      "comuna": "El Bosque"
+      "calle": "Manuel Montt",
+      "numero": "14",
+      "region": "Región de la Araucanía",
+      "comuna": "Angol"
     },
     "puntos": 2980
   }
