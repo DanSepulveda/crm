@@ -10,9 +10,9 @@ class RepositorioCliente:
 
     def __init__(self):
         datos = GestorArchivos.leer_json(self._PATH, default=[])
-        self._clientes = [self._crear_cliente(d) for d in datos]
+        self._clientes = [self._reconstruir_cliente(d) for d in datos]
 
-    def _crear_cliente(self, cliente):
+    def _reconstruir_cliente(self, cliente):
         """Crea un objeto Cliente a partir de su forma diccionario."""
         cliente = cliente.copy()
         tipo = cliente.pop("tipo", "Regular")
@@ -55,3 +55,13 @@ class RepositorioCliente:
         """Registra un nuevo Cliente en el sistema."""
         self._clientes.append(cliente)
         self._guardar()
+
+    def reemplazar(
+        self, cliente: ClienteCorporativo | ClientePremium | ClienteRegular
+    ):
+        """Busca un cliente y lo reemplaza por una nueva instancia con los datos editados."""
+        for i, c in enumerate(self._clientes):
+            if c.rut == cliente.rut:
+                self._clientes[i] = cliente
+                self._guardar()
+                return

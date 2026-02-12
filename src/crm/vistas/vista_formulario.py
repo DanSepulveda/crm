@@ -124,9 +124,10 @@ class VistaFormulario(ttk.Frame):
         fr_botones = ttk.Frame(frame_form)
         fr_botones.pack(fill="x", expand=True)
 
-        ttk.Button(
-            fr_botones, text="Crear usuario", command=self._onclick_guardar
-        ).pack(side="right")
+        self._btn_guardar = ttk.Button(
+            fr_botones, command=self._onclick_guardar
+        )
+        self._btn_guardar.pack(side="right")
 
         ttk.Button(
             fr_botones, text="Cancelar", command=self._onclick_cancelar
@@ -155,16 +156,38 @@ class VistaFormulario(ttk.Frame):
         self.canvas.bind_all("<MouseWheel>", self._onscroll)
 
     def preparar_creacion(self):
+        self._campos["rut"].config(state="normal")
+        self._campos["tipo"].config(state="readonly")
+        self.canvas.yview_moveto(0)
         self._modo_edicion = False
         self._cliente_actual = None
         self._limpiar_formulario()
+        self._btn_guardar.config(text="Crear usuario")
 
-    def _actualizar_comunas(self, _):
+    def preparar_edicion(self):
+        self.canvas.yview_moveto(0)
+        self._modo_edicion = True
+        rut = self._app.rut_usuario_seleccionado or ""
+        self._cliente_actual = self._app._servicio_cliente.obtener_uno(rut)
+        self._btn_guardar.config(text="Actualizar")
+        self._limpiar_formulario()
+        self._campos["tipo"].set(
+            self._cliente_actual.TIPO if self._cliente_actual else "Regular"
+        )
+        self._generar_campo_cliente(None)
+        self._cargar_datos(self._cliente_actual)
+        self._cliente_original = self._leer_formulario()
+        self._campos["rut"].config(state="disabled")
+        self._campos["tipo"].config(state="disabled")
+        self._actualizar_comunas(None, limpiar=False)
+
+    def _actualizar_comunas(self, _, limpiar: bool = True):
         """Cambia las opciones de comunas al momento de cambiar la región."""
         region: str = self._campos["region"].get()
         comunas = Direccion.obtener_comunas_por_region(region)
         self._campos["comuna"]["values"] = comunas
-        self._campos["comuna"].set("")
+        if limpiar:
+            self._campos["comuna"].set("")
 
     def _leer_formulario(self) -> dict:
         """Retorna un diccionario con los datos del formulario."""
@@ -189,33 +212,33 @@ class VistaFormulario(ttk.Frame):
         datos = self._leer_formulario()
 
         if self._modo_edicion:
-            # TODO
-            # respuesta = self._app._servicio_cliente.editar_cliente(datos)
-            pass
+            respuesta = self._app._servicio_cliente.editar_cliente(datos)
         else:
             respuesta = self._app._servicio_cliente.registrar_cliente(datos)
 
         if respuesta.exito:
             messagebox.showinfo("OK", respuesta.mensaje)
-            self._limpiar_formulario()
             self._app._mostrar_vista("VistaClientes")
         else:
             messagebox.showerror("ERROR", respuesta.mensaje)
 
     def _onclick_cancelar(self):
         """Redirige al menú principal, validando que no hayan datos sin guardar."""
+        datos = self._leer_formulario()
+
         if self._modo_edicion:
-            # TODO
-            pass
+            datos_sin_guardar = self._app._servicio_cliente.hay_cambios(datos)
         else:
-            form_vacio = esta_vacio(self._leer_formulario())
-            if not form_vacio:
-                confirmar = messagebox.askokcancel(
-                    "Advertencia",
-                    "Tiene datos sin guardar. Si continúa, se eliminarán.",
-                )
-                if not confirmar:
-                    return
+            datos_sin_guardar = not esta_vacio(datos)
+
+        if datos_sin_guardar:
+            confirmar = messagebox.askokcancel(
+                "Advertencia",
+                "Tiene datos sin guardar. Si continúa, se eliminarán.",
+            )
+            if not confirmar:
+                return
+
         self._app._mostrar_vista("VistaClientes")
 
     def _generar_campo_cliente(self, _):
@@ -236,3 +259,16 @@ class VistaFormulario(ttk.Frame):
         self._campos[tipo[0]] = Ctk.campo(
             self.fr_atributos, tipo[1], columna=1, fila=0
         )
+
+    def _cargar_datos(self, cliente):
+        """En modo edición, rellena el formulario con los datos del cliente."""
+        datos = cliente.a_diccionario()
+        direccion = datos.pop("direccion", {})
+        datos.update(direccion)
+
+        for clave, widget in self._campos.items():
+            if clave in datos:
+                if isinstance(widget, ttk.Combobox):
+                    widget.set(datos[clave])
+                else:
+                    widget.insert(0, datos[clave])

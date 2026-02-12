@@ -69,4 +69,6 @@ class App(tk.Tk):
         form.tkraise()
 
     def mostrar_formulario_edicion(self):
-        pass
+        form = self._vistas["VistaFormulario"]
+        form.preparar_edicion()
+        form.tkraise()

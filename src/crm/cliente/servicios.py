@@ -1,7 +1,11 @@
 from dataclasses import dataclass
 
-from . import ClienteCorporativo, ClientePremium, ClienteRegular
-from .repositorio import RepositorioCliente
+from . import (
+    ClienteCorporativo,
+    ClientePremium,
+    ClienteRegular,
+    RepositorioCliente,
+)
 
 
 @dataclass
@@ -19,6 +23,33 @@ class ServicioCliente:
 
     def __init__(self, repositorio: RepositorioCliente):
         self._repo = repositorio
+
+    def _reconstruir_cliente(self, datos):
+        datos = datos.copy()
+
+        direccion = {
+            "calle": datos.pop("calle"),
+            "numero": datos.pop("numero"),
+            "region": datos.pop("region"),
+            "comuna": datos.pop("comuna"),
+        }
+        datos["direccion"] = direccion
+        tipo = datos.pop("tipo", "Regular")
+
+        clase = self._MAPA_TIPOS[tipo]
+        return clase(**datos)
+
+    def hay_cambios(self, datos) -> bool:
+        cliente_original = self._repo.buscar_por_rut(datos["rut"])
+        cliente_editado = self._reconstruir_cliente(datos)
+        if not cliente_original:
+            return False
+        return (
+            cliente_original.a_diccionario() != cliente_editado.a_diccionario()
+        )
+
+    def obtener_uno(self, rut: str):
+        return self._repo.buscar_por_rut(rut)
 
     def obtener_todos(self):
         datos = self._repo.obtener_todos() or []
@@ -48,27 +79,24 @@ class ServicioCliente:
 
     def registrar_cliente(self, datos) -> RespuestaServicio:
         try:
-            datos = datos.copy()
-
             existe_usuario = self._repo.buscar_por_rut(datos["rut"])
             if existe_usuario:
                 raise ValueError("El RUT ya se encuentra registrado.")
 
-            direccion = {
-                "calle": datos.pop("calle"),
-                "numero": datos.pop("numero"),
-                "region": datos.pop("region"),
-                "comuna": datos.pop("comuna"),
-            }
-            datos["direccion"] = direccion
-            tipo = datos.pop("tipo", "Regular")
-
-            clase = self._MAPA_TIPOS.get(tipo)
-            if not clase:
-                return RespuestaServicio(False, "Tipo de cliente inválido.")
-
-            cliente = clase(**datos)
+            cliente = self._reconstruir_cliente(datos)
             self._repo.crear_uno(cliente)
             return RespuestaServicio(True, "Cliente creado correctamente.")
         except ValueError as e:
             return RespuestaServicio(False, str(e))
+
+    def editar_cliente(self, datos) -> RespuestaServicio:
+        cliente_original = self._repo.buscar_por_rut(datos["rut"])
+        if cliente_original is None:
+            return RespuestaServicio(False, "Cliente no registrado.")
+
+        cliente_editado = self._reconstruir_cliente(datos)
+        if cliente_original.a_diccionario() == cliente_editado.a_diccionario():
+            return RespuestaServicio(False, "No hay cambios para guardar.")
+
+        self._repo.reemplazar(cliente_editado)
+        return RespuestaServicio(True, "Cliente editado correctamente.")
