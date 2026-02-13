@@ -14,7 +14,7 @@ class App(tk.Tk):
     def __init__(self, servicio_cliente: ServicioCliente):
         super().__init__()
         self.rut_usuario_seleccionado = None
-        self._servicio_cliente = servicio_cliente
+        self.servicio_cliente = servicio_cliente
         self._vistas = {}
 
         # CONFIGURACIÓN VENTANA

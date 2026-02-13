@@ -168,7 +168,7 @@ class VistaFormulario(ttk.Frame):
         self.canvas.yview_moveto(0)
         self._modo_edicion = True
         rut = self._app.rut_usuario_seleccionado or ""
-        self._cliente_actual = self._app._servicio_cliente.obtener_uno(rut)
+        self._cliente_actual = self._app.servicio_cliente.obtener_uno(rut)
         self._btn_guardar.config(text="Actualizar")
         self._limpiar_formulario()
         self._campos["tipo"].set(
@@ -212,9 +212,9 @@ class VistaFormulario(ttk.Frame):
         datos = self._leer_formulario()
 
         if self._modo_edicion:
-            respuesta = self._app._servicio_cliente.editar_cliente(datos)
+            respuesta = self._app.servicio_cliente.editar_cliente(datos)
         else:
-            respuesta = self._app._servicio_cliente.registrar_cliente(datos)
+            respuesta = self._app.servicio_cliente.registrar_cliente(datos)
 
         if respuesta.exito:
             messagebox.showinfo("OK", respuesta.mensaje)
@@ -227,7 +227,7 @@ class VistaFormulario(ttk.Frame):
         datos = self._leer_formulario()
 
         if self._modo_edicion:
-            datos_sin_guardar = self._app._servicio_cliente.hay_cambios(datos)
+            datos_sin_guardar = self._app.servicio_cliente.hay_cambios(datos)
         else:
             datos_sin_guardar = not esta_vacio(datos)
 

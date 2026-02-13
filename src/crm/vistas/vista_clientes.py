@@ -124,8 +124,8 @@ class VistaClientes(ttk.Frame):
         """Rellena la tabla con los clientes resultantes de la búsqueda."""
         self._tabla.delete(*self._tabla.get_children())  # limpia la tabla
 
-        clientes = self._app._servicio_cliente.obtener_todos()
-        filtrados = self._app._servicio_cliente.obtener_filtrados(busqueda)
+        clientes = self._app.servicio_cliente.obtener_todos()
+        filtrados = self._app.servicio_cliente.obtener_filtrados(busqueda)
 
         if not clientes:
             titulo = "No hay clientes registrados."
@@ -182,7 +182,7 @@ class VistaClientes(ttk.Frame):
             "¿Seguro que desea eliminar al cliente seleccionado?",
         )
         if confirmar:
-            respuesta = self._app._servicio_cliente.eliminar_cliente(rut)
+            respuesta = self._app.servicio_cliente.eliminar_cliente(rut)
             if respuesta.exito:
                 busqueda = self._buscador.get()
                 self._refrescar_tabla(busqueda)
