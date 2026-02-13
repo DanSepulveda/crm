@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from typing import TYPE_CHECKING
 
 from src.crm.cliente import ServicioCliente
 from src.crm.vistas import (
@@ -10,10 +11,20 @@ from src.crm.vistas import (
 )
 
 
+if TYPE_CHECKING:
+    from src.crm.cliente import (
+        ClienteCorporativo,
+        ClientePremium,
+        ClienteRegular,
+    )
+
+
 class App(tk.Tk):
     def __init__(self, servicio_cliente: ServicioCliente):
         super().__init__()
-        self.rut_usuario_seleccionado = None
+        self.cliente_seleccionado: (
+            ClienteCorporativo | ClienteRegular | ClientePremium | None
+        ) = None
         self.servicio_cliente = servicio_cliente
         self._vistas = {}
 
@@ -45,14 +56,6 @@ class App(tk.Tk):
             frame.grid(column=0, row=0, sticky="nsew")
 
         self.mostrar_vista("VistaInicio")
-
-    @property
-    def rut_usuario_seleccionado(self) -> str | None:
-        return self._rut_usuario_seleccionado
-
-    @rut_usuario_seleccionado.setter
-    def rut_usuario_seleccionado(self, rut: str | None):
-        self._rut_usuario_seleccionado = rut
 
     def mostrar_vista(self, nombre_vista: str):
         vista = self._vistas[nombre_vista]

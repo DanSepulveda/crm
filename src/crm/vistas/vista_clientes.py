@@ -162,10 +162,12 @@ class VistaClientes(ttk.Frame):
         if seleccion:
             id_item = seleccion[0]
             rut_elegido: str = self._tabla.item(id_item, "values")[2].strip()
-            self._app.rut_usuario_seleccionado = rut_elegido
+            self._app.cliente_seleccionado = (
+                self._app.servicio_cliente.obtener_uno(rut_elegido)
+            )
             estado = "normal"
         else:
-            self._app.rut_usuario_seleccionado = None
+            self._app.cliente_seleccionado = None
             estado = "disabled"
 
         self._btn_editar.config(state=estado)
@@ -173,8 +175,8 @@ class VistaClientes(ttk.Frame):
 
     def _onclick_eliminar(self):
         """Ejecuta el servicio de eliminación, previa confirmación."""
-        rut = self._app.rut_usuario_seleccionado
-        if rut is None:
+        cliente = self._app.cliente_seleccionado
+        if cliente is None:
             return
 
         confirmar = messagebox.askokcancel(
@@ -182,10 +184,10 @@ class VistaClientes(ttk.Frame):
             "¿Seguro que desea eliminar al cliente seleccionado?",
         )
         if confirmar:
-            respuesta = self._app.servicio_cliente.eliminar_cliente(rut)
-            if respuesta.exito:
+            res = self._app.servicio_cliente.eliminar_cliente(cliente.rut)
+            if res.exito:
                 busqueda = self._buscador.get()
                 self._refrescar_tabla(busqueda)
-                messagebox.showinfo("OK", respuesta.mensaje)
+                messagebox.showinfo("OK", res.mensaje)
             else:
-                messagebox.showerror("Error", respuesta.mensaje)
+                messagebox.showerror("Error", res.mensaje)

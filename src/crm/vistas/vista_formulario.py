@@ -24,8 +24,6 @@ class VistaFormulario(ttk.Frame):
         super().__init__(padre)
         self._app = app
         self._campos = {}
-        self._modo_edicion = False
-        self._cliente_actual = None
         regiones = Direccion.obtener_regiones()
 
         # Configuración de filas y columnas para centrar el formulario
@@ -36,17 +34,17 @@ class VistaFormulario(ttk.Frame):
         self.rowconfigure(0, weight=1)
 
         # Configuración de canvas (especie de frame que permite scroll)
-        self.canvas = tk.Canvas(self, highlightthickness=0)
-        self.canvas.grid(column=1, row=0, sticky="nsew")
+        self._canvas = tk.Canvas(self, highlightthickness=0)
+        self._canvas.grid(column=1, row=0, sticky="nsew")
 
-        scrollbar = ttk.Scrollbar(self, command=self.canvas.yview)
+        scrollbar = ttk.Scrollbar(self, command=self._canvas.yview)
         scrollbar.grid(column=2, row=0, sticky="ns")
 
-        self.canvas.configure(yscrollcommand=scrollbar.set)
-        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        self._canvas.configure(yscrollcommand=scrollbar.set)
+        self._canvas.configure(scrollregion=self._canvas.bbox("all"))
 
-        frame_form = ttk.Frame(self.canvas, padding=(0, 0, 0, 40))
-        self.canvas.create_window((0, 0), window=frame_form, anchor="nw")
+        frame_form = ttk.Frame(self._canvas, padding=(0, 0, 0, 40))
+        self._canvas.create_window((0, 0), window=frame_form, anchor="nw")
 
         # 1) SECCIÓN PARA TIPO DE CLIENTE Y SU ATRIBUTO DIFERENCIADOR
         self.fr_atributos = ttk.LabelFrame(
@@ -147,35 +145,30 @@ class VistaFormulario(ttk.Frame):
         # - configuración del canvas para que el scroll funcione correctamente
         frame_form.bind(
             "<Configure>",
-            lambda e: self.canvas.configure(
-                scrollregion=self.canvas.bbox("all")
+            lambda e: self._canvas.configure(
+                scrollregion=self._canvas.bbox("all")
             ),
         )
 
         # - configuración para que el scroll funcione con la rueda del mouse
-        self.canvas.bind("<MouseWheel>", self._onscroll)
+        self._canvas.bind("<MouseWheel>", self._onscroll)
 
     def preparar_creacion(self):
         self._campos["rut"].config(state="normal")
         self._campos["tipo"].config(state="readonly")
-        self.canvas.yview_moveto(0)
-        self._modo_edicion = False
-        self._cliente_actual = None
+        self._canvas.yview_moveto(0)
+        self._app.cliente_seleccionado = None
         self._limpiar_formulario()
         self._btn_guardar.config(text="Crear usuario")
 
     def preparar_edicion(self):
-        self.canvas.yview_moveto(0)
-        self._modo_edicion = True
-        rut = self._app.rut_usuario_seleccionado or ""
-        self._cliente_actual = self._app.servicio_cliente.obtener_uno(rut)
+        assert self._app.cliente_seleccionado
+        self._canvas.yview_moveto(0)
         self._btn_guardar.config(text="Actualizar")
         self._limpiar_formulario()
-        self._campos["tipo"].set(
-            self._cliente_actual.TIPO if self._cliente_actual else "Regular"
-        )
+        self._campos["tipo"].set(self._app.cliente_seleccionado.TIPO)
         self._generar_campo_cliente(None)
-        self._cargar_datos(self._cliente_actual)
+        self._cargar_datos(self._app.cliente_seleccionado)
         self._cliente_original = self._leer_formulario()
         self._campos["rut"].config(state="disabled")
         self._campos["tipo"].config(state="disabled")
@@ -205,13 +198,13 @@ class VistaFormulario(ttk.Frame):
         """Controla la velocidad del scroll al usar la rueda del mouse."""
         os = platform.system()
         factor = evento.delta / 120 if os == "Windows" else evento.delta
-        self.canvas.yview_scroll(int(-1 * factor), "units")
+        self._canvas.yview_scroll(int(-1 * factor), "units")
 
     def _onclick_guardar(self):
         """Ejecuta el servicio de creación/edición de cliente."""
         datos = self._leer_formulario()
 
-        if self._modo_edicion:
+        if self._app.cliente_seleccionado:
             respuesta = self._app.servicio_cliente.editar_cliente(datos)
         else:
             respuesta = self._app.servicio_cliente.registrar_cliente(datos)
@@ -226,7 +219,7 @@ class VistaFormulario(ttk.Frame):
         """Redirige al menú principal, validando que no hayan datos sin guardar."""
         datos = self._leer_formulario()
 
-        if self._modo_edicion:
+        if self._app.cliente_seleccionado:
             datos_sin_guardar = self._app.servicio_cliente.hay_cambios(datos)
         else:
             datos_sin_guardar = not esta_vacio(datos)
