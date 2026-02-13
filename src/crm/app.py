@@ -44,7 +44,7 @@ class App(tk.Tk):
             self._vistas[vista.__name__] = frame
             frame.grid(column=0, row=0, sticky="nsew")
 
-        self._mostrar_vista("VistaInicio")
+        self.mostrar_vista("VistaInicio")
 
     @property
     def rut_usuario_seleccionado(self) -> str | None:
@@ -54,7 +54,7 @@ class App(tk.Tk):
     def rut_usuario_seleccionado(self, rut: str | None):
         self._rut_usuario_seleccionado = rut
 
-    def _mostrar_vista(self, nombre_vista: str):
+    def mostrar_vista(self, nombre_vista: str):
         vista = self._vistas[nombre_vista]
         if not vista:
             raise ValueError(f"Vista '{nombre_vista}' no existe.")

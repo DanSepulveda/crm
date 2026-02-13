@@ -9,7 +9,7 @@ class VistaLogs(ttk.Frame):
         ttk.Button(
             self,
             text="volver",
-            command=lambda: self.app._mostrar_vista("VistaInicio"),
+            command=lambda: self.app.mostrar_vista("VistaInicio"),
         ).pack()
 
         ttk.Label(self, text="Tabla de logs").pack()

@@ -113,7 +113,7 @@ class VistaClientes(ttk.Frame):
             frame_opciones,
             text="Volver al inicio",
             width=15,
-            command=lambda: self._app._mostrar_vista("VistaInicio"),
+            command=lambda: self._app.mostrar_vista("VistaInicio"),
         ).pack(pady=(40, 0))
 
     def resetear(self):

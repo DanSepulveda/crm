@@ -153,7 +153,7 @@ class VistaFormulario(ttk.Frame):
         )
 
         # - configuración para que el scroll funcione con la rueda del mouse
-        self.canvas.bind_all("<MouseWheel>", self._onscroll)
+        self.canvas.bind("<MouseWheel>", self._onscroll)
 
     def preparar_creacion(self):
         self._campos["rut"].config(state="normal")
@@ -218,7 +218,7 @@ class VistaFormulario(ttk.Frame):
 
         if respuesta.exito:
             messagebox.showinfo("OK", respuesta.mensaje)
-            self._app._mostrar_vista("VistaClientes")
+            self._app.mostrar_vista("VistaClientes")
         else:
             messagebox.showerror("ERROR", respuesta.mensaje)
 
@@ -239,7 +239,7 @@ class VistaFormulario(ttk.Frame):
             if not confirmar:
                 return
 
-        self._app._mostrar_vista("VistaClientes")
+        self._app.mostrar_vista("VistaClientes")
 
     def _generar_campo_cliente(self, _):
         """Agrega un campo para un atributo, dependiendo del tipo de cliente."""

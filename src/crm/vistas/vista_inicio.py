@@ -40,12 +40,12 @@ class VistaInicio(ttk.Frame):
             contenedor,
             text="Gestión de Clientes",
             width=20,
-            command=lambda: self._app._mostrar_vista("VistaClientes"),
+            command=lambda: self._app.mostrar_vista("VistaClientes"),
         ).pack(pady=5)
 
         ttk.Button(
             contenedor,
             text="Ver registro de LOGS",
             width=20,
-            command=lambda: self._app._mostrar_vista("VistaLogs"),
+            command=lambda: self._app.mostrar_vista("VistaLogs"),
         ).pack(pady=5)
