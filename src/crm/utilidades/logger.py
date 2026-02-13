@@ -21,4 +21,6 @@ class Logger:
         with open(cls._PATH, encoding="utf-8") as f:
             lineas = f.readlines()
 
-        return lineas[-n:]
+        lineas = [el.strip().split(" | ") for el in lineas[-n:]]
+        lineas.reverse()
+        return [(log[0], log[1], log[3]) for log in lineas]
