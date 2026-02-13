@@ -2,3 +2,4 @@
 # type: ignore
 from .componentes_tkinter import ComponentesTkinter
 from .gestor_archivos import GestorArchivos
+from .logger import Logger
