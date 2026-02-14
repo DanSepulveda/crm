@@ -11,26 +11,6 @@ class ClienteRegular(Cliente):
     def __str__(self) -> str:
         return f"{super().__str__()} - Puntos: {self.puntos}"
 
-    @staticmethod
-    def _validar_cantidad_positiva(
-        valor: int | str, nombre: str, permitir_cero: bool = False
-    ):
-        if (
-            isinstance(valor, str)
-            and not valor.isdigit()
-            and not isinstance(valor, int)
-        ):
-            raise ValueError(f"'{nombre}' debe ser un número entero.")
-
-        valor_numerico = int(valor)
-
-        if permitir_cero:
-            if valor_numerico < 0:
-                raise ValueError(f"'{nombre}' debe ser mayor o igual que cero")
-        else:
-            if valor_numerico <= 0:
-                raise ValueError(f"'{nombre}' debe ser mayor que cero.")
-
     @property
     def puntos(self) -> int:
         return self._puntos
