@@ -29,7 +29,7 @@
       "region": "Región de Coquimbo",
       "comuna": "La Serena"
     },
-    "porcentaje_descuento": 0.35
+    "porcentaje_descuento": 35
   },
   {
     "tipo": "Corporativo",
@@ -77,7 +77,7 @@
       "region": "Región del Maule",
       "comuna": "Talca"
     },
-    "porcentaje_descuento": 0.15
+    "porcentaje_descuento": 15
   },
   {
     "tipo": "Corporativo",
@@ -125,7 +125,7 @@
       "region": "Región de Valparaíso",
       "comuna": "Viña del Mar"
     },
-    "porcentaje_descuento": 0.48
+    "porcentaje_descuento": 48
   },
   {
     "tipo": "Corporativo",
@@ -189,7 +189,7 @@
       "region": "Región Metropolitana de Santiago",
       "comuna": "Las Condes"
     },
-    "porcentaje_descuento": 0.22
+    "porcentaje_descuento": 22
   },
   {
     "tipo": "Corporativo",
@@ -237,7 +237,7 @@
       "region": "Región de Los Lagos",
       "comuna": "Puerto Montt"
     },
-    "porcentaje_descuento": 0.5
+    "porcentaje_descuento": 5
   },
   {
     "tipo": "Corporativo",
@@ -285,7 +285,7 @@
       "region": "Región de la Araucanía",
       "comuna": "Villarrica"
     },
-    "porcentaje_descuento": 0.28
+    "porcentaje_descuento": 28
   },
   {
     "tipo": "Corporativo",
@@ -349,7 +349,7 @@
       "region": "Región de Magallanes y de la Antártica Chilena",
       "comuna": "Porvenir"
     },
-    "porcentaje_descuento": 0.42
+    "porcentaje_descuento": 42
   },
   {
     "tipo": "Corporativo",
@@ -397,7 +397,7 @@
       "region": "Región Metropolitana de Santiago",
       "comuna": "Santiago"
     },
-    "porcentaje_descuento": 0.12
+    "porcentaje_descuento": 12
   },
   {
     "tipo": "Corporativo",
@@ -445,7 +445,7 @@
       "region": "Región Metropolitana de Santiago",
       "comuna": "Lo Barnechea"
     },
-    "porcentaje_descuento": 0.3
+    "porcentaje_descuento": 3
   },
   {
     "tipo": "Corporativo",
@@ -509,7 +509,7 @@
       "region": "Región de Valparaíso",
       "comuna": "Concón"
     },
-    "porcentaje_descuento": 0.45
+    "porcentaje_descuento": 45
   },
   {
     "tipo": "Corporativo",
@@ -557,7 +557,7 @@
       "region": "Región de Los Lagos",
       "comuna": "Osorno"
     },
-    "porcentaje_descuento": 0.19
+    "porcentaje_descuento": 19
   },
   {
     "tipo": "Corporativo",
@@ -605,7 +605,7 @@
       "region": "Región de Arica y Parinacota",
       "comuna": "Arica"
     },
-    "porcentaje_descuento": 0.33
+    "porcentaje_descuento": 33
   },
   {
     "tipo": "Corporativo",
