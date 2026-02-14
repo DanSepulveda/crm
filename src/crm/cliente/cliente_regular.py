@@ -26,9 +26,9 @@ class ClienteRegular(Cliente):
         diccionario.update({"puntos": self.puntos})
         return diccionario
 
-    def acumular_por_compra(self, monto: int | str) -> str:
+    def acumular_por_compra(self, monto: int | str) -> int:
         """Agrega puntos al Cliente dependiendo del monto de la compra."""
         self._validar_cantidad_positiva(monto, "Monto", permitir_cero=False)
         acumulados = int(monto) // 1000  # 1 punto cada $1.000
         self._puntos += acumulados
-        return f"Ha acumulado {acumulados} puntos."
+        return acumulados
