@@ -46,13 +46,17 @@ class ServicioCliente:
 
     def hay_cambios(self, datos) -> bool:
         """Verifica si se ha modificado el usuario (comprobar el formulario)."""
-        cliente_original = self._repo.buscar_por_rut(datos["rut"])
-        cliente_editado = self._reconstruir_cliente(datos)
-        if not cliente_original:
+        try:
+            cliente_original = self._repo.buscar_por_rut(datos["rut"])
+            cliente_editado = self._reconstruir_cliente(datos)
+            if not cliente_original:
+                return False
+            return (
+                cliente_original.a_diccionario()
+                != cliente_editado.a_diccionario()
+            )
+        except ValueError:
             return False
-        return (
-            cliente_original.a_diccionario() != cliente_editado.a_diccionario()
-        )
 
     def obtener_uno(self, rut: str):
         """Retorna el cliente con el RUT indicado."""
@@ -108,15 +112,23 @@ class ServicioCliente:
 
     def editar_cliente(self, datos) -> RespuestaServicio:
         """Actualiza los datos de un Cliente, validando que esté registrado."""
-        cliente_original = self._repo.buscar_por_rut(datos["rut"])
-        if cliente_original is None:
-            logger.warning("Se ha intentado modificar cliente no registrado.")
-            return RespuestaServicio(False, "Cliente no registrado.")
+        try:
+            cliente_original = self._repo.buscar_por_rut(datos["rut"])
+            if cliente_original is None:
+                logger.warning(
+                    "Se ha intentado modificar cliente no registrado."
+                )
+                raise ValueError("Cliente no registrado.")
 
-        cliente_editado = self._reconstruir_cliente(datos)
-        if cliente_original.a_diccionario() == cliente_editado.a_diccionario():
-            return RespuestaServicio(False, "No hay cambios para guardar.")
+            cliente_editado = self._reconstruir_cliente(datos)
+            if (
+                cliente_original.a_diccionario()
+                == cliente_editado.a_diccionario()
+            ):
+                raise ValueError("No hay cambios para guardar.")
 
-        self._repo.reemplazar(cliente_editado)
-        logger.info(f"Cliente modificado. RUT: {datos['rut']}")
-        return RespuestaServicio(True, "Cliente editado correctamente.")
+            self._repo.reemplazar(cliente_editado)
+            logger.info(f"Cliente modificado. RUT: {datos['rut']}")
+            return RespuestaServicio(True, "Cliente editado correctamente.")
+        except ValueError as e:
+            return RespuestaServicio(False, str(e))
