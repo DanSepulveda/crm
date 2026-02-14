@@ -163,13 +163,14 @@ class VistaFormulario(ttk.Frame):
 
     def preparar_edicion(self):
         assert self._app.cliente_seleccionado
+        self._campos["rut"].config(state="normal")
+        self._campos["tipo"].config(state="readonly")
         self._canvas.yview_moveto(0)
         self._btn_guardar.config(text="Actualizar")
         self._limpiar_formulario()
         self._campos["tipo"].set(self._app.cliente_seleccionado.TIPO)
         self._generar_campo_cliente(None)
         self._cargar_datos(self._app.cliente_seleccionado)
-        self._cliente_original = self._leer_formulario()
         self._campos["rut"].config(state="disabled")
         self._campos["tipo"].config(state="disabled")
         self._actualizar_comunas(None, limpiar=False)
