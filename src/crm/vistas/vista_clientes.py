@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 from typing import TYPE_CHECKING, Literal
 
+from src.crm.utilidades import ComponentesTkinter as Ctk
+
 
 # Se importa App solo en desarrollo para poder usar su tipo. En tiempo de
 # ejecución se ignora el import ya que genera dependencia circular
@@ -116,6 +118,23 @@ class VistaClientes(ttk.Frame):
             command=lambda: self._app.mostrar_vista("VistaInicio"),
         ).pack(pady=(40, 0))
 
+        self._frame_venta = ttk.Frame(frame_opciones)
+        ttk.Label(
+            self._frame_venta,
+            text="Realizar venta",
+            font=("TkDefaultFont", 16, "bold", "underline"),
+        ).pack(pady=(30, 0))
+        self._beneficio = ttk.Label(self._frame_venta)
+        self._beneficio.pack(pady=10)
+        frame_campo = ttk.Frame(self._frame_venta)
+        frame_campo.pack()
+        self._monto = Ctk.campo(frame_campo, "Monto de venta", 0, 0, width=15)
+        ttk.Button(
+            self._frame_venta,
+            text="Realizar venta",
+            command=self._realizar_venta,
+        ).pack()
+
     def resetear(self):
         self._buscador.delete(0, tk.END)
         self._refrescar_tabla()
@@ -162,13 +181,18 @@ class VistaClientes(ttk.Frame):
         if seleccion:
             id_item = seleccion[0]
             rut_elegido: str = self._tabla.item(id_item, "values")[2].strip()
-            self._app.cliente_seleccionado = (
-                self._app.servicio_cliente.obtener_uno(rut_elegido)
-            )
+            cliente = self._app.servicio_cliente.obtener_uno(rut_elegido)
+            self._app.cliente_seleccionado = cliente
             estado = "normal"
+            # Configuración para cuadro de VENTA
+            beneficio = self._app.servicio_cliente.obtener_beneficio(cliente)
+            self._beneficio.config(text=beneficio)
+            self._monto.delete(0, tk.END)
+            self._frame_venta.pack()
         else:
             self._app.cliente_seleccionado = None
             estado = "disabled"
+            self._frame_venta.pack_forget()
 
         self._btn_editar.config(state=estado)
         self._btn_eliminar.config(state=estado)
@@ -191,3 +215,16 @@ class VistaClientes(ttk.Frame):
                 messagebox.showinfo("OK", res.mensaje)
             else:
                 messagebox.showerror("Error", res.mensaje)
+
+    def _realizar_venta(self):
+        monto = self._monto.get()
+        cliente = self._app.cliente_seleccionado
+        resultado = self._app.servicio_cliente.realizar_venta(monto, cliente)
+
+        if resultado.exito:
+            messagebox.showerror("Error", resultado.mensaje)
+        else:
+            messagebox.showinfo("Ok", resultado.mensaje)
+
+        busqueda = self._buscador.get()
+        self._refrescar_tabla(busqueda)
