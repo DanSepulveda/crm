@@ -56,12 +56,12 @@ class App(tk.Tk):
             foreground="white",
             background="#0067c0",
             font=("Segoe UI", 10, "bold"),
-            borderwidth=0
+            borderwidth=0,
         )
         style.map(
             "Primary.TButton",
             background=[("active", "#00529a")],
-            foreground=[("active", "white")]
+            foreground=[("active", "white")],
         )
         style.configure(
             "Secondary.TButton",
@@ -70,7 +70,7 @@ class App(tk.Tk):
             background="#f3f3f3",
             font=("Segoe UI Semibold", 10),
             borderwidth=1,
-            bordercolor="#0067c0"
+            bordercolor="#0067c0",
         )
         style.map(
             "Secondary.TButton",
@@ -83,9 +83,9 @@ class App(tk.Tk):
             padding=(0, 5, 0, 5),
             foreground="#c42b1c",
             background="#f3f3f3",
-            font=("Segoe UI Semibold", 10,),
+            font=("Segoe UI Semibold", 10),
             borderwidth=1,
-            bordercolor="#c42b1c"
+            bordercolor="#c42b1c",
         )
         style.map(
             "Danger.TButton",
@@ -104,12 +104,12 @@ class App(tk.Tk):
             foreground="#363636",
             padding=5,
             borderwidth=2,
-            font=("Segoe UI", 11)
+            font=("Segoe UI", 11),
         )
         style.map(
             "TEntry",
             fieldbackground=[("selected", "white"), ("disabled", "#f3f3f3")],
-            bordercolor=[("focus", "#0078d7")]
+            bordercolor=[("focus", "#0078d7")],
         )
         style.configure(
             "TCombobox",
@@ -135,24 +135,21 @@ class App(tk.Tk):
             rowheight=30,
             fieldbackground="#ffffff",
             font=("Segoe UI", 10),
-            borderwidth=0
+            borderwidth=0,
         )
         style.map(
             "Treeview",
-            background=[('selected', "#cfeaff")],
-            foreground=[('selected', '#1a1a1a')]
+            background=[("selected", "#cfeaff")],
+            foreground=[("selected", "#1a1a1a")],
         )
         style.configure(
             "Treeview.Heading",
             background="#f3f3f3",
             foreground="#1a1a1a",
             relief="flat",
-            font=("Segoe UI", 10, "bold")
+            font=("Segoe UI", 10, "bold"),
         )
-        style.map(
-            "Treeview.Heading",
-            background=[('active', '#e5e5e5')]
-        )
+        style.map("Treeview.Heading", background=[("active", "#e5e5e5")])
         # scrollbar
         style.configure(
             "Vertical.TScrollbar",
@@ -162,10 +159,12 @@ class App(tk.Tk):
             lightcolor="#cccccc",
             troughcolor="#f3f3f3",
             bordercolor="#f3f3f3",
-            arrowsize=12
+            arrowsize=12,
         )
-        style.map("Vertical.TScrollbar",
-            background=[('active', '#aaaaaa'), ('pressed', '#888888')])
+        style.map(
+            "Vertical.TScrollbar",
+            background=[("active", "#aaaaaa"), ("pressed", "#888888")],
+        )
 
         for vista in (VistaClientes, VistaFormulario, VistaInicio, VistaLogs):
             frame = vista(self, self)

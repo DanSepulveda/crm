@@ -38,7 +38,13 @@ class VistaFormulario(ttk.Frame):
             fila=0,
             valores=["Regular", "Premium", "Corporativo"],
         )
-        Ctk.campo(self.fr_atributos, "-- Seleccione tipo de cliente primero --", columna=1, fila=0, state="disabled")
+        Ctk.campo(
+            self.fr_atributos,
+            "-- Seleccione tipo de cliente primero --",
+            columna=1,
+            fila=0,
+            state="disabled",
+        )
         Ctk.separador_horizontal(frame_form)
 
         # 2) SECCIÓN PARA DATOS PERSONALES (nombres, apellidos, rut)
@@ -90,12 +96,19 @@ class VistaFormulario(ttk.Frame):
         fr_botones.pack(fill="x", expand=True, pady=(30, 0))
 
         self._btn_guardar = ttk.Button(
-            fr_botones, width=15, style="Primary.TButton", command=self._onclick_guardar
+            fr_botones,
+            width=15,
+            style="Primary.TButton",
+            command=self._onclick_guardar,
         )
         self._btn_guardar.pack(side="right")
 
         ttk.Button(
-            fr_botones, text="Cancelar", width=15, style="Danger.TButton", command=self._onclick_cancelar
+            fr_botones,
+            text="Cancelar",
+            width=15,
+            style="Danger.TButton",
+            command=self._onclick_cancelar,
         ).pack(side="right", padx=10)
 
         # ------------------------------ EVENTOS ------------------------------
@@ -108,7 +121,6 @@ class VistaFormulario(ttk.Frame):
         self._campos["tipo"].bind(
             "<<ComboboxSelected>>", self._generar_campo_cliente
         )
-
 
     def preparar_creacion(self):
         self._campos["rut"].config(state="normal")

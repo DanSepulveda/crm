@@ -54,8 +54,8 @@ class VistaLogs(ttk.Frame):
         self._tabla.pack(side="left", fill="both", expand=True)
         self._tabla.tag_configure("ERROR", foreground="#B22525")
         self._tabla.tag_configure("WARNING", foreground="#a16a1e")
-        self._tabla.tag_configure('fila_impar', background='#ffffff')
-        self._tabla.tag_configure('fila_par', background='#f9f9f9')
+        self._tabla.tag_configure("fila_impar", background="#ffffff")
+        self._tabla.tag_configure("fila_par", background="#f9f9f9")
         scroll_y.config(command=self._tabla.yview)
 
         # - agregar encabezados y configurar columnas
@@ -111,6 +111,6 @@ class VistaLogs(ttk.Frame):
                         tipo.replace("ING", ""),
                         descripcion,
                     ),
-                    tags=(tipo, 'fila_par' if i % 2 == 0 else 'fila_impar'),
+                    tags=(tipo, "fila_par" if i % 2 == 0 else "fila_impar"),
                 )
         self._titulo.config(text=titulo)
