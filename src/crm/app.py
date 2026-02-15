@@ -37,18 +37,135 @@ class App(tk.Tk):
         self.rowconfigure(0, weight=1)
 
         # ESTILOS TKINTER
+        self.configure(bg="#f3f3f3")
+        self.option_add("*TCombobox*Listbox.font", "SegoeUI 11")
+        self.option_add("*TCombobox*Listbox.background", "white")
+        self.option_add("*TCombobox*Listbox.foreground", "#363636")
+        self.option_add("*TCombobox*Listbox.selectBackground", "#0078d7")
+        self.option_add("*TCombobox*Listbox.selectForeground", "white")
+        self.option_add("*TCombobox*Listbox.relief", "flat")
+        self.option_add("*TCombobox*Listbox.borderwidth", 5)
+
         style = ttk.Style()
+        style.theme_use("clam")
 
+        # button
         style.configure(
-            "Custom.TButton", foreground="white", background="blue"
+            "Primary.TButton",
+            padding=(2, 7, 2, 7),
+            foreground="white",
+            background="#0067c0",
+            font=("Segoe UI", 10, "bold"),
+            borderwidth=0
         )
-        style.configure("Treeview", rowheight=30)
-
         style.map(
-            "Custom.TButton",
-            foreground=[("disabled", "gray")],
-            background=[("disabled", "#d9d9d9")],
+            "Primary.TButton",
+            background=[("active", "#00529a")],
+            foreground=[("active", "white")]
         )
+        style.configure(
+            "Secondary.TButton",
+            padding=(0, 5, 0, 5),
+            foreground="#0067c0",
+            background="#f3f3f3",
+            font=("Segoe UI Semibold", 10),
+            borderwidth=1,
+            bordercolor="#0067c0"
+        )
+        style.map(
+            "Secondary.TButton",
+            foreground=[("active", "#003f76"), ("disabled", "#a0a0a0")],
+            background=[("active", "#e3f2ff")],
+            bordercolor=[("disabled", "#d1d1d1")],
+        )
+        style.configure(
+            "Danger.TButton",
+            padding=(0, 5, 0, 5),
+            foreground="#c42b1c",
+            background="#f3f3f3",
+            font=("Segoe UI Semibold", 10,),
+            borderwidth=1,
+            bordercolor="#c42b1c"
+        )
+        style.map(
+            "Danger.TButton",
+            foreground=[("active", "#7e1b12"), ("disabled", "#a0a0a0")],
+            background=[("active", "#ffe3e1")],
+            bordercolor=[("disabled", "#d1d1d1")],
+        )
+        # label
+        style.configure("TLabel", background="#f3f3f3", foreground="#1a1a1a")
+        style.configure("Entry.TLabel", font=("Segoe UI Semibold", 10, "bold"))
+        style.configure("Titulo.TLabel", font=("Segoe UI", 12, "bold"))
+        # entry y combobox
+        style.configure(
+            "TEntry",
+            fieldbackground="white",
+            foreground="#363636",
+            padding=5,
+            borderwidth=2,
+            font=("Segoe UI", 11)
+        )
+        style.map(
+            "TEntry",
+            fieldbackground=[("selected", "white"), ("disabled", "#f3f3f3")],
+            bordercolor=[("focus", "#0078d7")]
+        )
+        style.configure(
+            "TCombobox",
+            fieldbackground="white",
+            foreground="#1a1a1a",
+            padding=5,
+            borderwidth=2,
+        )
+        style.map(
+            "TCombobox",
+            fieldbackground=[("readonly", "white")],
+            selectbackground=[("focus", "white"), ("!focus", "white")],
+            selectforeground=[("focus", "#1a1a1a"), ("!focus", "#1a1a1a")],
+            bordercolor=[("focus", "#0078d7")],
+        )
+        # frame
+        style.configure("TFrame", background="#f3f3f3")
+        # treeview
+        style.configure(
+            "Treeview",
+            background="#ffffff",
+            foreground="#1a1a1a",
+            rowheight=30,
+            fieldbackground="#ffffff",
+            font=("Segoe UI", 10),
+            borderwidth=0
+        )
+        style.map(
+            "Treeview",
+            background=[('selected', "#cfeaff")],
+            foreground=[('selected', '#1a1a1a')]
+        )
+        style.configure(
+            "Treeview.Heading",
+            background="#f3f3f3",
+            foreground="#1a1a1a",
+            relief="flat",
+            font=("Segoe UI", 10, "bold")
+        )
+        style.map(
+            "Treeview.Heading",
+            background=[('active', '#e5e5e5')]
+        )
+        # scrollbar
+        style.configure(
+            "Vertical.TScrollbar",
+            gripcount=0,
+            background="#cccccc",
+            darkcolor="#cccccc",
+            lightcolor="#cccccc",
+            troughcolor="#f3f3f3",
+            bordercolor="#f3f3f3",
+            arrowsize=12
+        )
+        style.map("Vertical.TScrollbar",
+            background=[('active', '#aaaaaa'), ('pressed', '#888888')])
 
         for vista in (VistaClientes, VistaFormulario, VistaInicio, VistaLogs):
             frame = vista(self, self)

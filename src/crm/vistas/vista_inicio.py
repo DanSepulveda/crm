@@ -29,23 +29,21 @@ class VistaInicio(ttk.Frame):
         ttk.Label(
             contenedor,
             text="Sistema de Gestión de Clientes",
-            font=("TkDefaultFont", 16, "bold"),
+            font=("Segoe UI", 16, "bold"),
         ).pack(pady=20)
-
-        ttk.Label(
-            contenedor, text="Seleccione una opción para continuar"
-        ).pack(pady=10)
 
         ttk.Button(
             contenedor,
             text="Gestión de Clientes",
-            width=20,
+            width=25,
+            style="Primary.TButton",
             command=lambda: self._app.mostrar_vista("VistaClientes"),
         ).pack(pady=5)
 
         ttk.Button(
             contenedor,
             text="Ver registro de LOGS",
-            width=20,
+            width=25,
+            style="Primary.TButton",
             command=lambda: self._app.mostrar_vista("VistaLogs"),
         ).pack(pady=5)

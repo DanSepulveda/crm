@@ -1,4 +1,3 @@
-import platform
 import tkinter as tk
 from tkinter import messagebox, ttk
 from typing import TYPE_CHECKING
@@ -26,32 +25,12 @@ class VistaFormulario(ttk.Frame):
         self._campos = {}
         regiones = Direccion.obtener_regiones()
 
-        # Configuración de filas y columnas para centrar el formulario
-        self.columnconfigure(0, weight=1)
-        self.columnconfigure(1, weight=2)
-        self.columnconfigure(2, weight=0)
-        self.columnconfigure(3, weight=1)
-        self.rowconfigure(0, weight=1)
-
-        # Configuración de canvas (especie de frame que permite scroll)
-        self._canvas = tk.Canvas(self, highlightthickness=0)
-        self._canvas.grid(column=1, row=0, sticky="nsew")
-
-        scrollbar = ttk.Scrollbar(self, command=self._canvas.yview)
-        scrollbar.grid(column=2, row=0, sticky="ns")
-
-        self._canvas.configure(yscrollcommand=scrollbar.set)
-        self._canvas.configure(scrollregion=self._canvas.bbox("all"))
-
-        frame_form = ttk.Frame(self._canvas, padding=(0, 0, 0, 40))
-        self._canvas.create_window((0, 0), window=frame_form, anchor="nw")
+        frame_form = ttk.Frame(self, padding=(0, 0, 0, 40))
+        frame_form.pack()
 
         # 1) SECCIÓN PARA TIPO DE CLIENTE Y SU ATRIBUTO DIFERENCIADOR
-        self.fr_atributos = ttk.LabelFrame(
-            frame_form, text="Cliente", padding=20
-        )
+        self.fr_atributos = ttk.Frame(frame_form, padding=0)
         self.fr_atributos.pack()
-
         self._campos["tipo"] = Ctk.combo(
             self.fr_atributos,
             "Tipo de cliente",
@@ -59,15 +38,12 @@ class VistaFormulario(ttk.Frame):
             fila=0,
             valores=["Regular", "Premium", "Corporativo"],
         )
-        Ctk.campo(self.fr_atributos, "-", columna=1, fila=0, state="disabled")
+        Ctk.campo(self.fr_atributos, "-- Seleccione tipo de cliente primero --", columna=1, fila=0, state="disabled")
         Ctk.separador_horizontal(frame_form)
 
         # 2) SECCIÓN PARA DATOS PERSONALES (nombres, apellidos, rut)
-        fr_info = ttk.LabelFrame(
-            frame_form, text="Información Personal", padding=20
-        )
+        fr_info = ttk.Frame(frame_form, padding=0)
         fr_info.pack()
-
         self._campos["rut"] = Ctk.campo(
             fr_info, "RUT", columna=0, fila=0, mb=True
         )
@@ -83,11 +59,8 @@ class VistaFormulario(ttk.Frame):
         Ctk.separador_horizontal(frame_form)
 
         # 3) SECCIÓN PARA DATOS DE CONTACTO (correo, teléfono)
-        fr_contacto = ttk.LabelFrame(
-            frame_form, text="Datos Contacto", padding=20
-        )
+        fr_contacto = ttk.Frame(frame_form, padding=0)
         fr_contacto.pack()
-
         self._campos["correo"] = Ctk.campo(
             fr_contacto, "Correo electrónico", columna=0, fila=0
         )
@@ -97,9 +70,8 @@ class VistaFormulario(ttk.Frame):
         Ctk.separador_horizontal(frame_form)
 
         # 4) SECCIÓN PARA DIRECCIÓN (calle, número, región, comuna)
-        fr_dir = ttk.LabelFrame(frame_form, text="Dirección", padding=20)
+        fr_dir = ttk.Frame(frame_form, padding=0)
         fr_dir.pack()
-
         self._campos["calle"] = Ctk.campo(
             fr_dir, "Calle", columna=0, fila=0, mb=True
         )
@@ -112,23 +84,18 @@ class VistaFormulario(ttk.Frame):
         self._campos["comuna"] = Ctk.combo(
             fr_dir, "Comuna", columna=1, fila=1, valores=[]
         )
-        Ctk.separador_horizontal(frame_form)
 
-        # 5) LABEL PARA MENSAJE DE ERROR (por dato erróneo en formulario)
-        self.label_estado = ttk.Label(frame_form, text="")
-        self.label_estado.pack()
-
-        # 6) SECCIÓN PARA BOTONES (crear/editar, cancelar)
+        # 5) SECCIÓN PARA BOTONES (crear/editar, cancelar)
         fr_botones = ttk.Frame(frame_form)
-        fr_botones.pack(fill="x", expand=True)
+        fr_botones.pack(fill="x", expand=True, pady=(30, 0))
 
         self._btn_guardar = ttk.Button(
-            fr_botones, command=self._onclick_guardar
+            fr_botones, width=15, style="Primary.TButton", command=self._onclick_guardar
         )
         self._btn_guardar.pack(side="right")
 
         ttk.Button(
-            fr_botones, text="Cancelar", command=self._onclick_cancelar
+            fr_botones, text="Cancelar", width=15, style="Danger.TButton", command=self._onclick_cancelar
         ).pack(side="right", padx=10)
 
         # ------------------------------ EVENTOS ------------------------------
@@ -142,21 +109,10 @@ class VistaFormulario(ttk.Frame):
             "<<ComboboxSelected>>", self._generar_campo_cliente
         )
 
-        # - configuración del canvas para que el scroll funcione correctamente
-        frame_form.bind(
-            "<Configure>",
-            lambda e: self._canvas.configure(
-                scrollregion=self._canvas.bbox("all")
-            ),
-        )
-
-        # - configuración para que el scroll funcione con la rueda del mouse
-        self._canvas.bind("<MouseWheel>", self._onscroll)
 
     def preparar_creacion(self):
         self._campos["rut"].config(state="normal")
         self._campos["tipo"].config(state="readonly")
-        self._canvas.yview_moveto(0)
         self._app.cliente_seleccionado = None
         self._limpiar_formulario()
         self._btn_guardar.config(text="Crear usuario")
@@ -165,7 +121,6 @@ class VistaFormulario(ttk.Frame):
         assert self._app.cliente_seleccionado
         self._campos["rut"].config(state="normal")
         self._campos["tipo"].config(state="readonly")
-        self._canvas.yview_moveto(0)
         self._btn_guardar.config(text="Actualizar")
         self._limpiar_formulario()
         self._campos["tipo"].set(self._app.cliente_seleccionado.TIPO)
@@ -194,12 +149,6 @@ class VistaFormulario(ttk.Frame):
                 campo.set("")
             else:
                 campo.delete(0, tk.END)
-
-    def _onscroll(self, evento):
-        """Controla la velocidad del scroll al usar la rueda del mouse."""
-        os = platform.system()
-        factor = evento.delta / 120 if os == "Windows" else evento.delta
-        self._canvas.yview_scroll(int(-1 * factor), "units")
 
     def _onclick_guardar(self):
         """Ejecuta el servicio de creación/edición de cliente."""

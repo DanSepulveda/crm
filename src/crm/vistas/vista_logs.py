@@ -26,8 +26,8 @@ class VistaLogs(ttk.Frame):
         frame_logs.grid(column=0, row=0, padx=(0, 20), sticky="nsew")
 
         # label para mostrar cantidad de logs
-        self._titulo = ttk.Label(frame_logs, font="Arial 14 bold")
-        self._titulo.pack(pady=15)
+        self._titulo = ttk.Label(frame_logs, style="Titulo.TLabel")
+        self._titulo.pack(pady=(0, 15))
 
         # 3 -> frame para tabla y scroll
         frame_tabla = ttk.Frame(frame_logs)
@@ -52,8 +52,10 @@ class VistaLogs(ttk.Frame):
             yscrollcommand=scroll_y.set,
         )
         self._tabla.pack(side="left", fill="both", expand=True)
-        self._tabla.tag_configure("ERROR", foreground="#D32F2F")
-        self._tabla.tag_configure("WARNING", foreground="#f0ad4e")
+        self._tabla.tag_configure("ERROR", foreground="#B22525")
+        self._tabla.tag_configure("WARNING", foreground="#a16a1e")
+        self._tabla.tag_configure('fila_impar', background='#ffffff')
+        self._tabla.tag_configure('fila_par', background='#f9f9f9')
         scroll_y.config(command=self._tabla.yview)
 
         # - agregar encabezados y configurar columnas
@@ -66,9 +68,7 @@ class VistaLogs(ttk.Frame):
                 anchor=posicion,
                 stretch=nombre == "Descripción",
             )
-            self._tabla.heading(nombre, text=nombre)
-
-        self._refrescar_tabla()
+            self._tabla.heading(nombre, text=nombre, anchor=posicion)
 
         # -------------------- FRAME BOTONES (DERECHA) ------------------------
         frame_opciones = ttk.Frame(self)
@@ -77,9 +77,10 @@ class VistaLogs(ttk.Frame):
         ttk.Button(
             frame_opciones,
             text="Volver al inicio",
-            width=15,
+            width=22,
+            style="Secondary.TButton",
             command=lambda: self._app.mostrar_vista("VistaInicio"),
-        ).pack(pady=(40, 0))
+        ).pack()
 
     def resetear(self):
         self._refrescar_tabla()
@@ -89,7 +90,6 @@ class VistaLogs(ttk.Frame):
         self._tabla.delete(*self._tabla.get_children())  # limpia la tabla
 
         logs = Logger.leer_ultimos_logs()
-
         if not logs:
             titulo = "No hay logs almacenados."
         else:
@@ -106,11 +106,11 @@ class VistaLogs(ttk.Frame):
                     "end",
                     values=(
                         str(i),
-                        str(fecha) + " " * 2,
-                        str(hora) + " " * 2,
-                        tipo,
-                        "" * 2 + descripcion,
+                        str(fecha),
+                        str(hora),
+                        tipo.replace("ING", ""),
+                        descripcion,
                     ),
-                    tags=(tipo),
+                    tags=(tipo, 'fila_par' if i % 2 == 0 else 'fila_impar'),
                 )
         self._titulo.config(text=titulo)

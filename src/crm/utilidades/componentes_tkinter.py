@@ -1,3 +1,4 @@
+import tkinter as tk
 from tkinter import ttk
 
 
@@ -9,17 +10,17 @@ class ComponentesTkinter:
         columna,
         fila,
         mb: bool = False,
-        width: int = 25,
+        width: int = 40,
         **kwargs,
     ):
         cframe = ttk.Frame(frame)
         cframe.grid(column=columna, row=fila)
 
-        label_campo = ttk.Label(cframe, text=label, font=("Arial", 14, "bold"))
-        label_campo.grid(column=0, row=0, padx=5, sticky="w")
+        label_campo = ttk.Label(cframe, text=label, style="Entry.TLabel")
+        label_campo.grid(column=0, row=0, padx=10, sticky="w")
 
         entry = ttk.Entry(cframe, width=width, **kwargs)
-        entry.grid(column=0, row=1, padx=5, pady=(0, 20) if mb else 0)
+        entry.grid(column=0, row=1, padx=10, pady=(0, 15) if mb else 0)
         return entry
 
     @staticmethod
@@ -29,16 +30,17 @@ class ComponentesTkinter:
         cframe = ttk.Frame(frame)
         cframe.grid(column=columna, row=fila)
 
-        label_campo = ttk.Label(cframe, text=label, font=("Arial", 14, "bold"))
-        label_campo.grid(column=0, row=0, padx=5, sticky="w")
+        label_campo = ttk.Label(cframe, text=label, style="Entry.TLabel")
+        label_campo.grid(column=0, row=0, padx=10, sticky="w")
 
         state = "readonly"
         entry = ttk.Combobox(
-            cframe, values=valores, state=state, width=23, height=8, **kwargs
+            cframe, values=valores, state=state, width=37, height=8, **kwargs
         )
-        entry.grid(column=0, row=1, padx=5, pady=(0, 20) if mb else 0)
+        entry.grid(column=0, row=1, padx=10, pady=(0, 15) if mb else 0)
         return entry
 
     @staticmethod
-    def separador_horizontal(frame, alto: int = 10):
-        ttk.Separator(frame, orient="horizontal").pack(pady=alto)
+    def separador_horizontal(frame):
+        linea = tk.Frame(frame, bg="#d1d1d1", height=1)
+        linea.pack(fill="x", padx=10, pady=20)

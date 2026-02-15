@@ -29,13 +29,13 @@ class VistaClientes(ttk.Frame):
         frame_busqueda = ttk.Frame(frame_clientes)
         frame_busqueda.pack(side="top", fill="x")
 
-        ttk.Label(frame_busqueda, text="Búsqueda").pack(side="left")
+        ttk.Label(frame_busqueda, text="Búsqueda", style="Entry.TLabel").pack(side="left")
 
         self._buscador = ttk.Entry(frame_busqueda)
         self._buscador.pack(side="left", fill="x", expand=True, padx=(10, 0))
 
         # 2 -> label para mostrar resultado de búsqueda
-        self._titulo = ttk.Label(frame_clientes, font="Arial 14 bold")
+        self._titulo = ttk.Label(frame_clientes, style="Titulo.TLabel")
         self._titulo.pack(pady=15)
 
         # 3 -> frame para tabla y scroll
@@ -49,7 +49,7 @@ class VistaClientes(ttk.Frame):
         # - tabla
         columnas: list[tuple[str, int, Literal["e", "w", "center"]]] = [
             ("N°", 40, "e"),
-            ("Tipo", 80, "center"),
+            ("Tipo", 85, "center"),
             ("RUT", 120, "e"),
             ("Nombres", 150, "w"),
             ("Apellido paterno", 150, "w"),
@@ -62,6 +62,8 @@ class VistaClientes(ttk.Frame):
             yscrollcommand=scroll_y.set,
         )
         self._tabla.pack(side="left", fill="both", expand=True)
+        self._tabla.tag_configure('fila_impar', background='#ffffff')
+        self._tabla.tag_configure('fila_par', background='#f9f9f9')
         scroll_y.config(command=self._tabla.yview)
 
         # - agregar encabezados y configurar columnas
@@ -74,11 +76,10 @@ class VistaClientes(ttk.Frame):
                 anchor=posicion,
                 stretch=nombre == "Nombres",
             )
-            self._tabla.heading(nombre, text=nombre)
+            self._tabla.heading(nombre, text=nombre + " " * 4 if nombre == "RUT" else nombre, anchor=posicion)
 
         self._buscador.bind("<KeyRelease>", self._onchange_busqueda)
         self._tabla.bind("<<TreeviewSelect>>", self._onclick_fila)
-        self._refrescar_tabla()
 
         # -------------------- FRAME BOTONES (DERECHA) ------------------------
         frame_opciones = ttk.Frame(self)
@@ -87,16 +88,17 @@ class VistaClientes(ttk.Frame):
         ttk.Button(
             frame_opciones,
             text="Crear Usuario",
-            width=15,
+            width=22,
+            style="Primary.TButton",
             command=self._app.mostrar_formulario_creacion,
         ).pack(pady=(0, 10))
 
         self._btn_editar = ttk.Button(
             frame_opciones,
             text="Editar usuario",
-            width=15,
+            width=22,
             state="disabled",
-            style="Custom.TButton",
+            style="Secondary.TButton",
             command=self._app.mostrar_formulario_edicion,
         )
         self._btn_editar.pack(pady=(0, 10))
@@ -104,9 +106,9 @@ class VistaClientes(ttk.Frame):
         self._btn_eliminar = ttk.Button(
             frame_opciones,
             text="Eliminar usuario",
-            width=15,
+            width=22,
             state="disabled",
-            style="Custom.TButton",
+            style="Danger.TButton",
             command=self._onclick_eliminar,
         )
         self._btn_eliminar.pack(pady=(0, 10))
@@ -114,24 +116,29 @@ class VistaClientes(ttk.Frame):
         ttk.Button(
             frame_opciones,
             text="Volver al inicio",
-            width=15,
+            width=22,
+            style="Secondary.TButton",
             command=lambda: self._app.mostrar_vista("VistaInicio"),
-        ).pack(pady=(40, 0))
+        ).pack(pady=(0, 10))
+        Ctk.separador_horizontal(frame_opciones)
 
+        # Frame para venta
         self._frame_venta = ttk.Frame(frame_opciones)
         ttk.Label(
             self._frame_venta,
             text="Realizar venta",
-            font=("TkDefaultFont", 16, "bold", "underline"),
-        ).pack(pady=(30, 0))
-        self._beneficio = ttk.Label(self._frame_venta)
+            font=("Segoe UI", 12, "bold", "underline"),
+        ).pack()
+        self._beneficio = ttk.Label(self._frame_venta, style="Entry.TLabel")
         self._beneficio.pack(pady=10)
         frame_campo = ttk.Frame(self._frame_venta)
         frame_campo.pack()
-        self._monto = Ctk.campo(frame_campo, "Monto de venta", 0, 0, width=15)
+        self._monto = Ctk.campo(frame_campo, "Monto de venta", 0, 0, width=18, mb=True)
         ttk.Button(
             self._frame_venta,
             text="Realizar venta",
+            width=15,
+            style="Primary.TButton",
             command=self._realizar_venta,
         ).pack()
 
@@ -161,11 +168,12 @@ class VistaClientes(ttk.Frame):
                     values=(
                         str(i),
                         c.TIPO,
-                        c.rut + " " * 3,
-                        " " * 3 + c.nombres,
-                        " " * 3 + c.apellido_paterno,
-                        " " * 3 + c.apellido_materno,
+                        c.rut + " " * 4,
+                        c.nombres,
+                        c.apellido_paterno,
+                        c.apellido_materno,
                     ),
+                    tags=('fila_par' if i % 2 == 0 else 'fila_impar')
                 )
         self._titulo.config(text=titulo)
 
