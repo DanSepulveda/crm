@@ -243,7 +243,10 @@ class VistaClientes(ttk.Frame):
             res = self._app.servicio_cliente.realizar_venta(monto, cliente)
             if not res.exito:
                 raise ValueError(res.mensaje)
-            messagebox.showinfo("Resultado", res.mensaje)
+            messagebox.showinfo(
+                "Resultado",
+                "\n".join([x.strip() for x in res.mensaje.split("\n")]),
+            )
             self._onchange_busqueda(None)
         except ValueError as e:
             messagebox.showerror("Error", str(e))

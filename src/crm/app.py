@@ -120,7 +120,7 @@ class App(tk.Tk):
         )
         style.map(
             "TCombobox",
-            fieldbackground=[("readonly", "white")],
+            fieldbackground=[("readonly", "white"), ("disabled", "#f3f3f3")],
             selectbackground=[("focus", "white"), ("!focus", "white")],
             selectforeground=[("focus", "#1a1a1a"), ("!focus", "#1a1a1a")],
             bordercolor=[("focus", "#0078d7")],

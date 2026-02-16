@@ -35,7 +35,7 @@ class ComponentesTkinter:
 
         state = "readonly"
         entry = ttk.Combobox(
-            cframe, values=valores, state=state, width=37, height=8, **kwargs
+            cframe, values=valores, state=state, width=38, height=8, **kwargs
         )
         entry.grid(column=0, row=1, padx=10, pady=(0, 15) if mb else 0)
         return entry
