@@ -227,11 +227,11 @@ class VistaClientes(ttk.Frame):
             )
             if confirmar:
                 res = self._app.servicio_cliente.eliminar_cliente(cliente.rut)
-                if not res:
-                    raise ValueError("Cliente no encontrado.")
+                if not res.exito:
+                    raise ValueError(res.mensaje)
                 busqueda = self._buscador.get()
                 self._refrescar_tabla(busqueda)
-                messagebox.showinfo("OK", "Cliente eliminado correctamente.")
+                messagebox.showinfo("OK", res.mensaje)
         except ValueError as e:
             messagebox.showerror("Error", str(e))
 
@@ -240,8 +240,10 @@ class VistaClientes(ttk.Frame):
             monto = self._monto.get()
             cliente = self._app.cliente_seleccionado
             assert cliente
-            mensaje = self._app.servicio_cliente.realizar_venta(monto, cliente)
-            messagebox.showinfo("Resultado", mensaje)
+            res = self._app.servicio_cliente.realizar_venta(monto, cliente)
+            if not res.exito:
+                raise ValueError(res.mensaje)
+            messagebox.showinfo("Resultado", res.mensaje)
             self._onchange_busqueda(None)
         except ValueError as e:
             messagebox.showerror("Error", str(e))

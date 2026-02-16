@@ -164,18 +164,21 @@ class VistaFormulario(ttk.Frame):
 
     def _onclick_guardar(self):
         """Ejecuta el servicio de creación/edición de cliente."""
-        datos = self._leer_formulario()
+        try:
+            datos = self._leer_formulario()
 
-        if self._app.cliente_seleccionado:
-            respuesta = self._app.servicio_cliente.editar_cliente(datos)
-        else:
-            respuesta = self._app.servicio_cliente.registrar_cliente(datos)
+            if self._app.cliente_seleccionado:
+                respuesta = self._app.servicio_cliente.editar_cliente(datos)
+            else:
+                respuesta = self._app.servicio_cliente.registrar_cliente(datos)
 
-        if respuesta.exito:
-            messagebox.showinfo("OK", respuesta.mensaje)
-            self._app.mostrar_vista("VistaClientes")
-        else:
-            messagebox.showerror("ERROR", respuesta.mensaje)
+            if respuesta.exito:
+                messagebox.showinfo("OK", respuesta.mensaje)
+                self._app.mostrar_vista("VistaClientes")
+            else:
+                messagebox.showerror("ERROR", respuesta.mensaje)
+        except ValueError as e:
+            messagebox.showerror("Error", str(e))
 
     def _onclick_cancelar(self):
         """Redirige al menú principal, validando que no hayan datos sin guardar."""
