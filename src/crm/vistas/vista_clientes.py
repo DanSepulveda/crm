@@ -226,7 +226,9 @@ class VistaClientes(ttk.Frame):
                 "¿Seguro que desea eliminar al cliente seleccionado?",
             )
             if confirmar:
-                self._app.servicio_cliente.eliminar_cliente(cliente.rut)
+                res = self._app.servicio_cliente.eliminar_cliente(cliente.rut)
+                if not res:
+                    raise ValueError("Cliente no encontrado.")
                 busqueda = self._buscador.get()
                 self._refrescar_tabla(busqueda)
                 messagebox.showinfo("OK", "Cliente eliminado correctamente.")
