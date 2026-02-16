@@ -82,16 +82,15 @@ class ServicioCliente:
             or busqueda in c.rut.lower()
         ]
 
-    def eliminar_cliente(self, rut: str) -> RespuestaServicio:
+    def eliminar_cliente(self, rut: str):
         """Elimina un Cliente, validando previamente que esté registrado."""
         eliminado = self._repo.eliminar_uno(rut)
 
         if not eliminado:
             logger.warning("Se ha intentado eliminar cliente no registrado.")
-            return RespuestaServicio(False, "Cliente no encontrado.")
+            raise ValueError("Cliente no encontrado.")
 
         logger.info(f"Cliente eliminado. RUT: {rut}")
-        return RespuestaServicio(True, "Cliente eliminado correctamente.")
 
     def registrar_cliente(self, datos) -> RespuestaServicio:
         """Registra un nuevo Cliente, validando que no se encuentre registrado."""
@@ -140,40 +139,39 @@ class ServicioCliente:
         if cliente is None:
             return ""
         if isinstance(cliente, ClienteRegular):
-            return f"Puntos disponibles: {cliente.puntos}"
+            return f"Puntos: {cliente.puntos:,}".replace(",", ".")
         if isinstance(cliente, ClientePremium):
-            return f"Descuento {cliente.porcentaje_descuento}%"
-        return f"Crédito: ${cliente.limite_credito:,}.".replace(",", ".")
+            return f"Descuento: {cliente.porcentaje_descuento}%"
+        return f"Crédito: ${cliente.limite_credito:,}".replace(",", ".")
 
     def realizar_venta(
         self,
         monto: int | str,
-        cliente: ClienteRegular | ClientePremium | ClienteCorporativo | None,
-    ) -> RespuestaServicio:
-        try:
-            if cliente is None:
-                raise ValueError("Debe seleccionar un cliente.")
-            elif isinstance(cliente, ClienteRegular):
-                p_iniciales = cliente.puntos
-                p_acumulados = cliente.acumular_por_compra(monto)
-                resultado = f"Puntos iniciales: {p_iniciales}\nPuntos acumulados: {p_acumulados}\nPuntos totales: {p_iniciales + p_acumulados}"
-                self._repo.reemplazar(cliente)
-                return RespuestaServicio(True, resultado)
-            elif isinstance(cliente, ClientePremium):
-                descuento = cliente.calcular_descuento(monto)
-                monto = int(monto)
-                a_pagar = monto - descuento
-                resultado = f"Monto venta: ${monto:,}\nDescuento: ${descuento:,}({cliente.porcentaje_descuento}%)\nMonto a pagar: ${a_pagar:,}".replace(
-                    ",", "."
-                )
-                return RespuestaServicio(True, resultado)
-            else:
-                credito_inicial = cliente.limite_credito
-                cliente.utilizar_crédito(monto)
-                resultado = f"Crédito inicial: ${credito_inicial:,}\nCrédito utilizado: ${int(monto):,}\nCrédito actual: ${(credito_inicial - int(monto)):,}".replace(
-                    ",", "."
-                )
-                self._repo.reemplazar(cliente)
-                return RespuestaServicio(True, resultado)
-        except ValueError as e:
-            return RespuestaServicio(False, str(e))
+        cliente: ClienteRegular | ClientePremium | ClienteCorporativo,
+    ) -> str:
+        if isinstance(cliente, ClienteRegular):
+            p_iniciales = cliente.puntos
+            p_acumulados = cliente.acumular_por_compra(monto)
+            resultado = f"""
+            Puntos iniciales: {p_iniciales}\n
+            Puntos acumulados: {p_acumulados}\n
+            Puntos totales: {p_iniciales + p_acumulados}"""
+            self._repo.reemplazar(cliente)
+        elif isinstance(cliente, ClientePremium):
+            descuento = cliente.calcular_descuento(monto)
+            monto = int(monto)
+            a_pagar = monto - descuento
+            resultado = f"""
+            Monto venta: ${monto:,}\n
+            Descuento ({cliente.porcentaje_descuento}%): ${descuento:,}\n
+            Monto a pagar: ${a_pagar:,}""".replace(",", ".")
+        else:
+            credito_inicial = cliente.limite_credito
+            cliente.utilizar_crédito(monto)
+            credito_final = credito_inicial - int(monto)
+            resultado = f"""
+            Crédito inicial: ${credito_inicial:,}\n
+            Crédito utilizado: ${int(monto):,}\n
+            Crédito actual: ${credito_final:,}""".replace(",", ".")
+            self._repo.reemplazar(cliente)
+        return resultado

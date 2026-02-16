@@ -29,7 +29,9 @@ class VistaClientes(ttk.Frame):
         frame_busqueda = ttk.Frame(frame_clientes)
         frame_busqueda.pack(side="top", fill="x")
 
-        ttk.Label(frame_busqueda, text="Búsqueda", style="Entry.TLabel").pack(side="left")
+        ttk.Label(frame_busqueda, text="Búsqueda", style="Entry.TLabel").pack(
+            side="left"
+        )
 
         self._buscador = ttk.Entry(frame_busqueda)
         self._buscador.pack(side="left", fill="x", expand=True, padx=(10, 0))
@@ -62,8 +64,8 @@ class VistaClientes(ttk.Frame):
             yscrollcommand=scroll_y.set,
         )
         self._tabla.pack(side="left", fill="both", expand=True)
-        self._tabla.tag_configure('fila_impar', background='#ffffff')
-        self._tabla.tag_configure('fila_par', background='#f9f9f9')
+        self._tabla.tag_configure("fila_impar", background="#ffffff")
+        self._tabla.tag_configure("fila_par", background="#f9f9f9")
         scroll_y.config(command=self._tabla.yview)
 
         # - agregar encabezados y configurar columnas
@@ -76,7 +78,11 @@ class VistaClientes(ttk.Frame):
                 anchor=posicion,
                 stretch=nombre == "Nombres",
             )
-            self._tabla.heading(nombre, text=nombre + " " * 4 if nombre == "RUT" else nombre, anchor=posicion)
+            self._tabla.heading(
+                nombre,
+                text=nombre + " " * 4 if nombre == "RUT" else nombre,
+                anchor=posicion,
+            )
 
         self._buscador.bind("<KeyRelease>", self._onchange_busqueda)
         self._tabla.bind("<<TreeviewSelect>>", self._onclick_fila)
@@ -133,7 +139,9 @@ class VistaClientes(ttk.Frame):
         self._beneficio.pack(pady=10)
         frame_campo = ttk.Frame(self._frame_venta)
         frame_campo.pack()
-        self._monto = Ctk.campo(frame_campo, "Monto de venta", 0, 0, width=18, mb=True)
+        self._monto = Ctk.campo(
+            frame_campo, "Monto de venta", 0, 0, width=18, mb=True
+        )
         ttk.Button(
             self._frame_venta,
             text="Realizar venta",
@@ -143,8 +151,10 @@ class VistaClientes(ttk.Frame):
         ).pack()
 
     def resetear(self):
+        """Función limpiadora. Se ejecuta antes de mostrar la vista."""
         self._buscador.delete(0, tk.END)
         self._refrescar_tabla()
+        self._tabla.yview_moveto(0)
 
     def _refrescar_tabla(self, busqueda: str = ""):
         """Rellena la tabla con los clientes resultantes de la búsqueda."""
@@ -173,7 +183,7 @@ class VistaClientes(ttk.Frame):
                         c.apellido_paterno,
                         c.apellido_materno,
                     ),
-                    tags=('fila_par' if i % 2 == 0 else 'fila_impar')
+                    tags=("fila_par" if i % 2 == 0 else "fila_impar"),
                 )
         self._titulo.config(text=titulo)
 
@@ -207,32 +217,32 @@ class VistaClientes(ttk.Frame):
 
     def _onclick_eliminar(self):
         """Ejecuta el servicio de eliminación, previa confirmación."""
-        cliente = self._app.cliente_seleccionado
-        if cliente is None:
-            return
+        try:
+            cliente = self._app.cliente_seleccionado
+            if cliente is None:
+                raise ValueError("Debe seleccionar un cliente.")
 
-        confirmar = messagebox.askokcancel(
-            "Confirmar eliminación",
-            "¿Seguro que desea eliminar al cliente seleccionado?",
-        )
-        if confirmar:
-            res = self._app.servicio_cliente.eliminar_cliente(cliente.rut)
-            if res.exito:
+            confirmar = messagebox.askokcancel(
+                "Confirmar eliminación",
+                "¿Seguro que desea eliminar al cliente seleccionado?",
+            )
+            if confirmar:
+                self._app.servicio_cliente.eliminar_cliente(cliente.rut)
                 busqueda = self._buscador.get()
                 self._refrescar_tabla(busqueda)
-                messagebox.showinfo("OK", res.mensaje)
-            else:
-                messagebox.showerror("Error", res.mensaje)
+                messagebox.showinfo("OK", "Cliente eliminado correctamente.")
+        except ValueError as e:
+            messagebox.showerror("Error", str(e))
 
     def _realizar_venta(self):
-        monto = self._monto.get()
-        cliente = self._app.cliente_seleccionado
-        resultado = self._app.servicio_cliente.realizar_venta(monto, cliente)
+        try:
+            monto = self._monto.get()
+            cliente = self._app.cliente_seleccionado
+            if cliente is None:
+                raise ValueError("Debe seleccionar un cliente.")
 
-        if resultado.exito:
-            messagebox.showerror("Error", resultado.mensaje)
-        else:
-            messagebox.showinfo("Ok", resultado.mensaje)
-
-        busqueda = self._buscador.get()
-        self._refrescar_tabla(busqueda)
+            mensaje = self._app.servicio_cliente.realizar_venta(monto, cliente)
+            messagebox.showinfo("Resultado", mensaje)
+            self._onchange_busqueda(None)
+        except ValueError as e:
+            messagebox.showerror("Error", str(e))
