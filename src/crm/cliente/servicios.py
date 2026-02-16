@@ -18,6 +18,10 @@ class RespuestaServicio:
     mensaje: str
 
 
+class RutRegistradoError(Exception):
+    pass
+
+
 class ServicioCliente:
     _MAPA_TIPOS = {
         "Regular": ClienteRegular,
@@ -106,13 +110,13 @@ class ServicioCliente:
                 logger.warning(
                     f"Creación fallida. El cliente RUT: {datos['rut']} ya se encuentra registrado."
                 )
-                raise ValueError("El RUT ya se encuentra registrado.")
+                raise RutRegistradoError("El RUT ya se encuentra registrado.")
 
             cliente = self._reconstruir_cliente(datos)
             self._repo.crear_uno(cliente)
             logger.info(f"Nuevo cliente registrado. RUT: {datos['rut']}")
             return RespuestaServicio(True, "Cliente creado correctamente.")
-        except ValueError as e:
+        except (ValueError, RutRegistradoError) as e:
             return RespuestaServicio(False, str(e))
 
     def editar_cliente(self, datos) -> RespuestaServicio:
@@ -145,9 +149,9 @@ class ServicioCliente:
         if cliente is None:
             return ""
         if isinstance(cliente, ClienteRegular):
-            return f"Puntos disponibles: {cliente.puntos}"
+            return f"Puntos: {cliente.puntos:,}".replace(",", ".")
         if isinstance(cliente, ClientePremium):
-            return f"Descuento {cliente.porcentaje_descuento}%"
+            return f"Descuento: {cliente.porcentaje_descuento}%"
         return f"Crédito: ${cliente.limite_credito:,}.".replace(",", ".")
 
     def realizar_venta(

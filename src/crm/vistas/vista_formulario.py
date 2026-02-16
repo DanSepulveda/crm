@@ -172,13 +172,14 @@ class VistaFormulario(ttk.Frame):
             else:
                 respuesta = self._app.servicio_cliente.registrar_cliente(datos)
 
-            if respuesta.exito:
-                messagebox.showinfo("OK", respuesta.mensaje)
-                self._app.mostrar_vista("VistaClientes")
-            else:
-                messagebox.showerror("ERROR", respuesta.mensaje)
+            if not respuesta.exito:
+                raise ValueError(respuesta.mensaje)
+            messagebox.showinfo("OK", respuesta.mensaje)
+            self._app.mostrar_vista("VistaClientes")
         except ValueError as e:
             messagebox.showerror("Error", str(e))
+            if "registrado" in str(e):
+                self._campos["rut"].delete(0, tk.END)
 
     def _onclick_cancelar(self):
         """Redirige al menú principal, validando que no hayan datos sin guardar."""
