@@ -2,7 +2,7 @@
   {
     "tipo": "Corporativo",
     "rut": "12884321-3",
-    "nombres": "Julián",
+    "nombres": "Julián Andrés",
     "apellido_paterno": "Zaldívar",
     "apellido_materno": "Lorca",
     "correo": "jzaldivar@logistica-austral.cl",
@@ -34,7 +34,7 @@
   {
     "tipo": "Corporativo",
     "rut": "15773201-3",
-    "nombres": "Carlos",
+    "nombres": "Carlos Alberto",
     "apellido_paterno": "Errázuriz",
     "apellido_materno": "Vial",
     "correo": "contacto@techcorp.cl",
@@ -50,7 +50,7 @@
   {
     "tipo": "Regular",
     "rut": "19200341-5",
-    "nombres": "Francisca",
+    "nombres": "Francisca Elena",
     "apellido_paterno": "Muñoz",
     "apellido_materno": "Rojas",
     "correo": "fran.munoz@email.com",
@@ -66,7 +66,7 @@
   {
     "tipo": "Premium",
     "rut": "16778402-K",
-    "nombres": "Andrés",
+    "nombres": "Andrés Felipe",
     "apellido_paterno": "Castro",
     "apellido_materno": "Morales",
     "correo": "a.castro@gmail.com",
@@ -82,7 +82,7 @@
   {
     "tipo": "Corporativo",
     "rut": "20334812-6",
-    "nombres": "Valentina",
+    "nombres": "Valentina Paz",
     "apellido_paterno": "Pinto",
     "apellido_materno": "Díaz",
     "correo": "vpinto@logistica-norte.cl",
@@ -98,7 +98,7 @@
   {
     "tipo": "Regular",
     "rut": "10223904-0",
-    "nombres": "Sebastián",
+    "nombres": "Sebastián Enrique",
     "apellido_paterno": "Tapia",
     "apellido_materno": "Fuentes",
     "correo": "seba.tapia@outlook.com",
@@ -114,7 +114,7 @@
   {
     "tipo": "Premium",
     "rut": "18115674-0",
-    "nombres": "Camila",
+    "nombres": "Camila Fernanda",
     "apellido_paterno": "Henríquez",
     "apellido_materno": "Silva",
     "correo": "cami.h@gmail.com",
@@ -130,7 +130,7 @@
   {
     "tipo": "Corporativo",
     "rut": "14552109-2",
-    "nombres": "Roberto",
+    "nombres": "Roberto Antonio",
     "apellido_paterno": "Araya",
     "apellido_materno": "Cortes",
     "correo": "ventas@minera-andes.cl",
@@ -146,7 +146,7 @@
   {
     "tipo": "Regular",
     "rut": "15882341-1",
-    "nombres": "Javiera",
+    "nombres": "Javiera Isabel",
     "apellido_paterno": "Salazar",
     "apellido_materno": "Peña",
     "correo": "javis@email.com",
@@ -162,7 +162,7 @@
   {
     "tipo": "Regular",
     "rut": "16584210-3",
-    "nombres": "Felipe",
+    "nombres": "Felipe Eduardo",
     "apellido_paterno": "Vargas",
     "apellido_materno": "Orellana",
     "correo": "f.vargas@yahoo.cl",
@@ -178,7 +178,7 @@
   {
     "tipo": "Premium",
     "rut": "20114876-6",
-    "nombres": "Antonia",
+    "nombres": "Antonia Belén",
     "apellido_paterno": "Carrasco",
     "apellido_materno": "Godoy",
     "correo": "anto.c@live.com",
@@ -194,7 +194,7 @@
   {
     "tipo": "Corporativo",
     "rut": "17833490-5",
-    "nombres": "Ignacio",
+    "nombres": "Ignacio Javier",
     "apellido_paterno": "Sepúlveda",
     "apellido_materno": "Méndez",
     "correo": "gerencia@agro-valle.cl",
@@ -210,7 +210,7 @@
   {
     "tipo": "Regular",
     "rut": "21008745-1",
-    "nombres": "Daniela",
+    "nombres": "Daniela Alejandra",
     "apellido_paterno": "Molina",
     "apellido_materno": "Valenzuela",
     "correo": "dani.m@email.com",
@@ -226,7 +226,7 @@
   {
     "tipo": "Premium",
     "rut": "12349001-0",
-    "nombres": "Gonzalo",
+    "nombres": "Gonzalo Mauricio",
     "apellido_paterno": "Reyes",
     "apellido_materno": "Figueroa",
     "correo": "g.reyes@empresa.com",
@@ -242,7 +242,7 @@
   {
     "tipo": "Corporativo",
     "rut": "15112890-4",
-    "nombres": "Verónica",
+    "nombres": "Verónica Patricia",
     "apellido_paterno": "Toro",
     "apellido_materno": "Pardo",
     "correo": "v.toro@constructora-mar.cl",
@@ -258,7 +258,7 @@
   {
     "tipo": "Regular",
     "rut": "19882345-7",
-    "nombres": "Cristian",
+    "nombres": "Cristian Rodrigo",
     "apellido_paterno": "Zúñiga",
     "apellido_materno": "Heredia",
     "correo": "czuniga@gmail.com",
@@ -274,7 +274,7 @@
   {
     "tipo": "Premium",
     "rut": "21334980-5",
-    "nombres": "Loreto",
+    "nombres": "Loreto Andrea",
     "apellido_paterno": "Farías",
     "apellido_materno": "Toledo",
     "correo": "lore.farias@email.com",
@@ -290,7 +290,7 @@
   {
     "tipo": "Corporativo",
     "rut": "17993412-4",
-    "nombres": "Mauricio",
+    "nombres": "Mauricio Alejandro",
     "apellido_paterno": "Bravo",
     "apellido_materno": "Sáez",
     "correo": "mbravo@retailchile.cl",
@@ -306,7 +306,7 @@
   {
     "tipo": "Regular",
     "rut": "18336102-3",
-    "nombres": "Nicole",
+    "nombres": "Nicole Estefanía",
     "apellido_paterno": "Vásquez",
     "apellido_materno": "Donoso",
     "correo": "n.vasquez@gmail.com",
@@ -322,7 +322,7 @@
   {
     "tipo": "Regular",
     "rut": "12903456-4",
-    "nombres": "Esteban",
+    "nombres": "Esteban Samuel",
     "apellido_paterno": "Miranda",
     "apellido_materno": "Reyes",
     "correo": "emiranda@outlook.com",
@@ -338,7 +338,7 @@
   {
     "tipo": "Premium",
     "rut": "14228963-6",
-    "nombres": "Bárbara",
+    "nombres": "Bárbara Michelle",
     "apellido_paterno": "Sanhueza",
     "apellido_materno": "Guerra",
     "correo": "bsanhueza@gmail.com",
@@ -354,7 +354,7 @@
   {
     "tipo": "Corporativo",
     "rut": "10556214-4",
-    "nombres": "Hugo",
+    "nombres": "Hugo Leonardo",
     "apellido_paterno": "Navarrete",
     "apellido_materno": "Ponce",
     "correo": "hnavarrete@transporte-rapido.cl",
@@ -370,7 +370,7 @@
   {
     "tipo": "Regular",
     "rut": "22415903-K",
-    "nombres": "Andrea",
+    "nombres": "Andrea Carolina",
     "apellido_paterno": "Olivares",
     "apellido_materno": "Urzúa",
     "correo": "aolivares@email.com",
@@ -386,7 +386,7 @@
   {
     "tipo": "Premium",
     "rut": "11884322-3",
-    "nombres": "Patricio",
+    "nombres": "Patricio Omar",
     "apellido_paterno": "Gallardo",
     "apellido_materno": "Vidal",
     "correo": "pgallardo@gmail.com",
@@ -402,7 +402,7 @@
   {
     "tipo": "Corporativo",
     "rut": "17445632-1",
-    "nombres": "Claudia",
+    "nombres": "Claudia Viviana",
     "apellido_paterno": "Palacios",
     "apellido_materno": "Arroyo",
     "correo": "cpalacios@textil-sur.cl",
@@ -418,7 +418,7 @@
   {
     "tipo": "Regular",
     "rut": "13774210-1",
-    "nombres": "Gabriel",
+    "nombres": "Gabriel Alfonso",
     "apellido_paterno": "Espejo",
     "apellido_materno": "Luna",
     "correo": "gespejo@outlook.cl",
@@ -434,7 +434,7 @@
   {
     "tipo": "Premium",
     "rut": "23551023-5",
-    "nombres": "Mónica",
+    "nombres": "Mónica Beatriz",
     "apellido_paterno": "Riveros",
     "apellido_materno": "Bernal",
     "correo": "m.riveros@email.com",
@@ -450,7 +450,7 @@
   {
     "tipo": "Corporativo",
     "rut": "11228954-2",
-    "nombres": "Álvaro",
+    "nombres": "Álvaro Renato",
     "apellido_paterno": "Bustamante",
     "apellido_materno": "Salas",
     "correo": "abustamante@energia-solar.cl",
@@ -466,7 +466,7 @@
   {
     "tipo": "Regular",
     "rut": "19114567-4",
-    "nombres": "Sandra",
+    "nombres": "Sandra Cecilia",
     "apellido_paterno": "Campos",
     "apellido_materno": "Duran",
     "correo": "s.campos@gmail.com",
@@ -482,7 +482,7 @@
   {
     "tipo": "Regular",
     "rut": "19632115-2",
-    "nombres": "Ricardo",
+    "nombres": "Ricardo Octavio",
     "apellido_paterno": "Guerrero",
     "apellido_materno": "Flores",
     "correo": "r.guerrero@email.cl",
@@ -498,7 +498,7 @@
   {
     "tipo": "Premium",
     "rut": "23105784-6",
-    "nombres": "Natalia",
+    "nombres": "Natalia Soledad",
     "apellido_paterno": "Valdés",
     "apellido_materno": "Maldonado",
     "correo": "n.valdes@yahoo.com",
@@ -514,7 +514,7 @@
   {
     "tipo": "Corporativo",
     "rut": "13447812-8",
-    "nombres": "Oscar",
+    "nombres": "Oscar Manuel",
     "apellido_paterno": "Cabrera",
     "apellido_materno": "Leiva",
     "correo": "ventas@frutos-chile.cl",
@@ -530,7 +530,7 @@
   {
     "tipo": "Regular",
     "rut": "18556321-9",
-    "nombres": "Karla",
+    "nombres": "Karla Daniela",
     "apellido_paterno": "Suárez",
     "apellido_materno": "Jiménez",
     "correo": "k.suarez@gmail.com",
@@ -546,7 +546,7 @@
   {
     "tipo": "Premium",
     "rut": "14992103-6",
-    "nombres": "Héctor",
+    "nombres": "Héctor Francisco",
     "apellido_paterno": "Barrera",
     "apellido_materno": "Escobar",
     "correo": "h.barrera@outlook.com",
@@ -562,7 +562,7 @@
   {
     "tipo": "Corporativo",
     "rut": "22883412-2",
-    "nombres": "Elena",
+    "nombres": "Elena Victoria",
     "apellido_paterno": "Correa",
     "apellido_materno": "Saavedra",
     "correo": "contacto@vinos-andes.cl",
@@ -578,7 +578,7 @@
   {
     "tipo": "Regular",
     "rut": "16221509-4",
-    "nombres": "Matías",
+    "nombres": "Matías Ignacio",
     "apellido_paterno": "Ibarra",
     "apellido_materno": "Pavez",
     "correo": "m.ibarra@gmail.com",
@@ -594,7 +594,7 @@
   {
     "tipo": "Premium",
     "rut": "12667432-5",
-    "nombres": "Sofía",
+    "nombres": "Sofía Marcela",
     "apellido_paterno": "Oyarzún",
     "apellido_materno": "Lara",
     "correo": "sofi.oyarzun@email.com",
@@ -610,7 +610,7 @@
   {
     "tipo": "Corporativo",
     "rut": "20445781-6",
-    "nombres": "Raúl",
+    "nombres": "Raúl Humberto",
     "apellido_paterno": "Aguayo",
     "apellido_materno": "Cerda",
     "correo": "operaciones@pesquera-sur.cl",
@@ -626,7 +626,7 @@
   {
     "tipo": "Regular",
     "rut": "13998234-7",
-    "nombres": "Constanza",
+    "nombres": "Constanza Javiera",
     "apellido_paterno": "Parra",
     "apellido_materno": "Vergara",
     "correo": "conny.parra@gmail.com",
