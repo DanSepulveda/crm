@@ -200,6 +200,7 @@ class VistaClientes(ttk.Frame):
             id_item = seleccion[0]
             rut_elegido: str = self._tabla.item(id_item, "values")[2].strip()
             cliente = self._app.servicio_cliente.obtener_uno(rut_elegido)
+            assert cliente
             self._app.cliente_seleccionado = cliente
             estado = "normal"
             # Configuración para cuadro de VENTA
@@ -219,9 +220,7 @@ class VistaClientes(ttk.Frame):
         """Ejecuta el servicio de eliminación, previa confirmación."""
         try:
             cliente = self._app.cliente_seleccionado
-            if cliente is None:
-                raise ValueError("Debe seleccionar un cliente.")
-
+            assert cliente
             confirmar = messagebox.askokcancel(
                 "Confirmar eliminación",
                 "¿Seguro que desea eliminar al cliente seleccionado?",
@@ -238,9 +237,7 @@ class VistaClientes(ttk.Frame):
         try:
             monto = self._monto.get()
             cliente = self._app.cliente_seleccionado
-            if cliente is None:
-                raise ValueError("Debe seleccionar un cliente.")
-
+            assert cliente
             mensaje = self._app.servicio_cliente.realizar_venta(monto, cliente)
             messagebox.showinfo("Resultado", mensaje)
             self._onchange_busqueda(None)
