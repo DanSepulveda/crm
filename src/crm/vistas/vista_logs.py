@@ -84,6 +84,7 @@ class VistaLogs(ttk.Frame):
 
     def resetear(self):
         self._refrescar_tabla()
+        self._tabla.yview_moveto(0)
 
     def _refrescar_tabla(self):
         """Rellena la tabla con los logs del sistema."""
